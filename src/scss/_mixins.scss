@@ -1,0 +1,12 @@
+@mixin linea ($bottom) {
+  content: '';
+  position: absolute;
+  background: $black;
+  width: 95vw;
+  height: 2px;
+  left: 0;
+  right: 0;
+  bottom: $bottom;
+  margin: auto;
+  border-radius: 50%;
+}
