@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "scss:watch": "sass --watch src/scss:src/css",
-    "scss:build": "sass src/scss:src/css",
+    "scss:build": "sass --verbose --no-source-map src/scss:src/css",
     "dev": "concurrently \"npm:start\" \"npm:scss:watch\""
   },
   "keywords": [],
