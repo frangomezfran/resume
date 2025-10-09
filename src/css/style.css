@@ -248,3 +248,28 @@ nav a:hover {
   transform: translateY(1px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+@media (max-width: 768px) {
+  .clap-button body {
+    padding: 0 10px;
+  }
+  .clap-button #container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+  .clap-button nav {
+    flex-direction: column;
+    gap: 15px;
+    position: static;
+  }
+  .clap-button #nombre {
+    padding-top: 20px;
+  }
+  .clap-button #habilidades #habilidades_cuadros {
+    flex-direction: column;
+    gap: 0;
+  }
+  .clap-button #habilidades .cuadro_completo {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}

@@ -283,4 +283,38 @@ nav {
     transform: translateY(1px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
+
+  // --- Responsive Design ---
+@media (max-width: 768px) {
+    body {
+      padding: 0 10px; // Reduce padding on smaller screens
+    }
+
+    #container {
+      padding: 20px;
+      margin: 20px auto;
+    }
+
+    nav {
+      flex-direction: column;
+      gap: 15px;
+      position: static; // On mobile, nav is not sticky to avoid taking up screen space
+    }
+
+    #nombre {
+      padding-top: 20px; // Reset padding since nav is not sticky on mobile
+    }
+
+    #habilidades {
+      #habilidades_cuadros {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .cuadro_completo {
+        width: 100%; // Full width on mobile
+        margin-bottom: 30px;
+      }
+    }
+  }
 }
