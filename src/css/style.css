@@ -261,6 +261,14 @@ nav a:hover {
     gap: 15px;
     position: static;
   }
+  .clap-button .nav-links, .clap-button .nav-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .clap-button .nav-buttons button {
+    width: 100%;
+    max-width: 300px;
+  }
   .clap-button #nombre {
     padding-top: 20px;
   }
