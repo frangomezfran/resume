@@ -301,6 +301,16 @@ nav {
       position: static; // On mobile, nav is not sticky to avoid taking up screen space
     }
 
+    .nav-links, .nav-buttons {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-buttons button {
+      width: 100%;
+      max-width: 300px;
+    }
+  
     #nombre {
       padding-top: 20px; // Reset padding since nav is not sticky on mobile
     }
