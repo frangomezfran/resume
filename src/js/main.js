@@ -36,9 +36,12 @@ changeLanguage('en');
 
 // **PASO IMPORTANTE**: Pega aquí el objeto de configuración de Firebase que copiaste.
 const firebaseConfig = {
-  // apiKey: "AIzaSy...",
-  // authDomain: "resume-app-....firebaseapp.com",
-  // ...
+  apiKey: "AIzaSyASecjTZKHw6RzkJTMt5GQgGhXNigGe88c",
+  authDomain: "resume-app-960e4.firebaseapp.com",
+  projectId: "resume-app-960e4",
+  storageBucket: "resume-app-960e4.firebasestorage.app",
+  messagingSenderId: "566896126889",
+  appId: "1:566896126889:web:38d049aeeff23e1871f2b8"
 };
 
 // Inicializa Firebase solo si la configuración no está vacía
