@@ -1,6 +1,252 @@
-*{padding:0;margin:0;box-sizing:content-box}
-a{color:inherit;text-decoration:none}
-body{background:#f7f7f7;color:#111;font-family:Verdana}
-nav{display:flex;justify-content:space-evenly;align-items:center;background-color:#111;color:#f7f7f7;padding:10px}
-nav a{padding:5px 10px}
-nav a:hover{background-color:#f7f7f7;color:#111;border-radius:5px}#nombre{position:relative;text-align:center;margin:30px 0;}#nombre p{margin:1em;}#nombre::after{content:"";position:absolute;background:#111;width:95vw;height:2px;left:0;right:0;bottom:-20px;margin:auto;border-radius:50%}#about{text-align:center;margin:50px 10% 30px 10%}#habilidades h2{position:relative;text-align:center;margin-bottom:10px;font-size:14pt;}#habilidades h2::after{content:"";position:absolute;background:#111;width:95vw;height:2px;left:0;right:0;bottom:-5px;margin:auto;border-radius:50%}#habilidades #habilidades_cuadros{display:flex;flex-flow:row wrap;justify-content:space-evenly;align-items:center}#habilidades #habilidades_cuadros .cuadro_completo{margin:20px 100px}#habilidades #habilidades_cuadros .cuadro_completo p{padding-top: 0.8em;}#habilidades #habilidades_cuadros .cuadro{display:grid;grid-template-columns:auto auto}#experiencia a{color:#0d8ddd}#experiencia h2{position:relative;text-align:center;margin-bottom:10px;font-size:14pt;}#experiencia h2::after{content:"";position:absolute;background:#111;width:95vw;height:2px;left:0;right:0;bottom:-5px;margin:auto;border-radius:50%}#experiencia .experiencia_empresa{display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;padding:0 10%;margin:10px 0;}#experiencia .experiencia_data{padding:0 10%;margin-bottom:30px}/*# sourceMappingURL=style.css.map */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+  color: #343a40;
+  font-family: "Helvetica", "Arial", sans-serif;
+  line-height: 1.6;
+  padding: 0 20px;
+}
+
+#container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+a {
+  color: #2575fc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #6a11cb;
+}
+
+h1, h2, h3 {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #212529;
+  margin-bottom: 0.75em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+strong {
+  font-weight: bold;
+}
+
+nav {
+  background: #212529;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  border-radius: 12px;
+  position: sticky;
+  top: 20px;
+  z-index: 1000;
+}
+nav .nav-links, nav .nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+nav a {
+  color: #f8f9fa;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+nav a:hover {
+  background-color: #495057;
+  color: #ffffff;
+}
+
+#nombre {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-top: 40px;
+}
+#nombre h1 {
+  margin-bottom: 0.25em;
+}
+#nombre p {
+  font-size: 1.1rem;
+  color: #6c757d;
+}
+
+#about {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 30px 0;
+}
+
+.section-divider {
+  border: 0;
+  height: 1px;
+  background-color: #e9ecef;
+  margin: 40px 0;
+}
+
+#habilidades h3 {
+  margin-bottom: 1em;
+}
+#habilidades #habilidades_cuadros {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+#habilidades #habilidades_cuadros .cuadro_completo {
+  width: 48%;
+}
+#habilidades .cuadro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+}
+#habilidades .cuadro p {
+  background-color: #e9ecef;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+#habilidades .cuadro p:hover {
+  transform: translateY(-2px);
+  filter: brightness(95%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+#experiencia .experience-item {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+#experiencia .experience-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: #dee2e6;
+}
+#experiencia .experiencia_empresa {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+#experiencia .experiencia_empresa a {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#experiencia .experiencia_empresa p {
+  font-style: italic;
+  color: #6c757d;
+}
+#experiencia .experiencia_data strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+  color: #495057;
+}
+
+.lang-toggle-button {
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+.lang-toggle-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+.lang-toggle-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+.lang-toggle-button:hover:before {
+  left: 100%;
+}
+.lang-toggle-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.clap-button {
+  background: linear-gradient(45deg, #ff512f, #f09819);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+.clap-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+.clap-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+.clap-button:hover:before {
+  left: 100%;
+}
+.clap-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/*# sourceMappingURL=style.css.map */
