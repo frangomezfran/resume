@@ -3,142 +3,116 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Fran's Resume</title>
+  <title data-key="title">Fran's Resume</title>
   <link rel="icon" href="src/img/favicon-java.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="src/css/style.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P82ZCP7T5V"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-P82ZCP7T5V');
-    </script>
+  
 </head>
 
 <body id="container">
   
   <nav>
-    <a href="https://www.linkedin.com/in/frangomezfran/" target="_blank">Linkedin</a>
-    <a href="https://github.com/frangomezfran" target="_blank">GitHub</a>
-    <a href="https://gitlab.com/frangomezfran" target="_blank">GitLab</a>
+    <div class="nav-links">
+      <a href="https://www.linkedin.com/in/frangomezfran/" target="_blank" data-key="nav_linkedin"></a>
+      <a href="https://github.com/frangomezfran" target="_blank" data-key="nav_github"></a>
+      <a href="https://gitlab.com/frangomezfran" target="_blank" data-key="nav_gitlab"></a>
+    </div>
+    <div class="nav-buttons">
+      <button id="lang-toggle" class="lang-toggle-button" onclick="toggleLanguage()"></button>
+      <button id="clap-button" class="clap-button">👏 0</button>
+    </div>
   </nav>
 
   <div id="nombre">
-    <h1>Franco Gomez</h1>
-    <p>Buenos Aires, Mar del Plata • frangomez0566@gmail.com • linkedin.com/in/frangomezfran</p>
+    <h1 data-key="name"></h1>
+    <p data-key="contact"></p>
   </div>
 
-  <div id="about">
-    Soy graduado de la UTNMDP en la carrera de programación. Durante mis estudios, adquirí experiencia en el desarrollo
-    de proyectos utilizando lenguajes como C, PHP, Java y MYSQL, entre otras tecnologías. Actualmente, trabajo como
-    Backend Developer, especializado en Java, donde he formado parte de varios grupos de trabajo en diversos proyectos.
-  </div>
+  <hr class="section-divider">
+
+  <div id="about" data-key="about"></div>
+
+  <hr class="section-divider">
 
   <div id="habilidades">
-    <h2>HABILIDADES</h2>
+    <h2 data-key="skills_title"></h2>
     <div id="habilidades_cuadros">
       <div class="cuadro_completo">
-        <h3>Lenguajes y Frameworks:</h3>
-        <div class="cuadro">
-          <p>• C</p>
-          <p>• PHP</p>
-          <p>• JAVA</p>
-          <p>• MySQL</p>
-          <p>• Spring</p>
-          <p>• Hibernate</p>
-          <p>• Docker</p>
-          <p>• JavaScript</p>
+        <h3 data-key="skills_languages_frameworks_title"></h3>
+        <div class="cuadro" data-key="skills_languages_frameworks_list">
         </div>
       </div>
       <div class="cuadro_completo">
-        <h3>Otros:</h3>
-        <p>• En constante búsqueda de nuevos conocimientos</p>
-        <div class="cuadro">
-          <p>• Ingles (Intermedio)</li>
-          <p>• Italiano (Básico)</li>
-          <p>• Habilidades Blandas</li>
-          <p>• Trabajo en equipo</li>
-          <p>• Proactividad</li>
-          <p>• Comunicación Clara</li>
+        <h3 data-key="skills_other_title"></h3>
+        <p data-key="skills_other_intro"></p>
+        <div class="cuadro" data-key="skills_other_list">
         </div>
       </div>
     </div>
   </div>
 
+  <hr class="section-divider">
+
   <div id="experiencia">
-    <h2>EXPERIENCIA PROFESIONAL</h2>
-    <div>
+    <h2 data-key="experience_title"></h2>
+    <div class="experience-item">
       <div class="experiencia_empresa">
-        <a href="https://www.osde.com.ar/index.html#!homepage.html" target="_blank">OSDE</a>
-        <p>Octubre 2023 - <b>Actualidad</b></p>
+        <a href="https://www.osde.com.ar/index.html#!homepage.html" target="_blank" data-key="experience_osde_link_text"></a>
+        <p data-key="experience_osde_date"></p>
       </div>
       <div class="experiencia_data">
-        <strong>Backend Developer</strong>
-        <p>Mi rol principal implica el diseño, desarrollo y mantenimiento de diversas aplicaciones utilizando tecnologías clave
-          como Java, MySQL, SQL, Spring, Hibernate y Quarkus. Mi enfoque se centra en garantizar la eficiencia y la seguridad
-          de las soluciones que respaldan los procesos críticos de la organización. Además, colaboro estrechamente con otros
-          equipos para integrar sistemas y optimizar el rendimiento.</p>
+        <strong data-key="experience_osde_role"></strong>
+        <p data-key="experience_osde_description"></p>
       </div>
     </div>
-    <div>
+    <div class="experience-item">
       <div class="experiencia_empresa">
-        <a href="https://www.softtek.com/es/" target="_blank">Softtek</a>
-        <p>Febrero 2023 - Octubre 2023</p>
+        <a href="https://www.softtek.com/es/" target="_blank" data-key="experience_softtek_link_text"></a>
+        <p data-key="experience_softtek1_date"></p>
       </div>
       <div class="experiencia_data">
-        <strong>Backend Developer</strong>
-        <p>Colaboraba en un equipo compuesto por desarrolladores y analistas funcionales en el marco de un Proyecto llave en mano.
-          Mi rol se centraba principalmente en el desarrollo backend utilizando Java, Spring y MySQL. He demostrado habilidad en la 
-          interpretación y comprensión de la documentación técnica, trabajando con diversos casos funcionales para asegurar la correcta
-          implementación a nivel código de los requisitos del proyecto. Esta experiencia me ha brindado una valiosa oportunidad para ampliar
-          mis conocimientos técnicos, tanto en el ámbito de desarrollo como en las metodologías de trabajo empleadas.</p>
+        <strong data-key="experience_softtek1_role"></strong>
+        <p data-key="experience_softtek1_description"></p>
       </div>
     </div>
-    <div>
+    <div class="experience-item">
       <div class="experiencia_empresa">
-        <a href="https://www.softtek.com/es/" target="_blank">Softtek</a>
-        <p>Septiembre 2022 - Febrero 2023</p>
+        <a href="https://www.softtek.com/es/" target="_blank" data-key="experience_softtek_link_text"></a>
+        <p data-key="experience_softtek2_date"></p>
       </div>
       <div class="experiencia_data">
-        <strong>Backend Developer</strong>
-        <p>Fui parte de un equipo en donde participaban desarrolladores y analistas funcionales me desempeñé en
-          distintas tareas de mantenimiento y monitoreo de aplicaciones en producción para un importante cliente del
-          sector de la salud en Argentina. Mi rol consistió en la resolución de incidencias, creación de nuevas
-          funcionalidades y colaboración estrecha con otros departamentos. Adquirí habilidades en la detección y
-          corrección de errores, pruebas exhaustivas y trabajo efectivo bajo presión en un entorno dinámico y orientado
-          a resultados.</p>
+        <strong data-key="experience_softtek2_role"></strong>
+        <p data-key="experience_softtek2_description"></p>
       </div>
     </div>
-    <div>
+    <div class="experience-item">
       <div class="experiencia_empresa">
-        <a href="https://www.softtek.com/es/" target="_blank">Softtek</a>
-        <p>Julio 2022 - Septiembre 2022</p>
+        <a href="https://www.softtek.com/es/" target="_blank" data-key="experience_softtek_link_text"></a>
+        <p data-key="experience_softtek3_date"></p>
       </div>
       <div class="experiencia_data">
-        <strong>Bootcamp Fullstack Developer</strong>
-        <p>Participé en un Bootcamp intensivo de 3 meses donde adquirí y consolidé conocimientos en diversas
-          tecnologías, como Java 8, Spring, Hibernate, MySQL, Patrones de Diseño, lectura y uso de Logs, Docker, Git,
-          GitFlow, React, Javascript y diseño de DER's. Durante el Bootcamp, trabajé en el desarrollo de una aplicación
-          web monolítica, donde colaboré en la creación de una API y su correspondiente frontend.</p>
+        <strong data-key="experience_softtek3_role"></strong>
+        <p data-key="experience_softtek3_description"></p>
       </div>
     </div>
-    <div>
+    <div class="experience-item">
       <div class="experiencia_empresa">
-        <a href="https://mdp.utn.edu.ar/" target="_blank">Universidad Tecnológica Nacional</a>
-        <p>Septiembre 2021 - Enero 2022</p>
+        <a href="https://mdp.utn.edu.ar/" target="_blank" data-key="experience_utn_link_text"></a>
+        <p data-key="experience_utn_date"></p>
       </div>
       <div class="experiencia_data">
-        <strong>Backend-Frontend Developer</strong>
-        <p>Fui parte de la creación de una aplicación web donde los estudiantes de la UTNMDP pueden postularse a
-          propuestas laborales de empresas según su carrera. Utilizamos una base de datos gestionada con MySQL y una API
-          de la universidad para acceder a los datos de los alumnos. La aplicación está diseñada en PHP siguiendo el
-          patrón MVC y POO, ofreciendo a los estudiantes una forma intuitiva de encontrar oportunidades laborales
-          relevantes a su campo de estudio. Además, hemos priorizado la seguridad de los datos y creado un puente
-          efectivo entre estudiantes y empresas.</p>
+        <strong data-key="experience_utn_role"></strong>
+        <p data-key="experience_utn_description"></p>
       </div>
     </div>
   </div>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  
+  <!-- Your custom script -->
+  <script src="src/js/main.js"></script>
 </body>
 
 </html>
