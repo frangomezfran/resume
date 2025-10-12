@@ -175,20 +175,29 @@ nav a:hover {
 
 .lang-toggle-button {
   background: linear-gradient(45deg, #6a11cb, #2575fc);
-  color: white;
   border: none;
-  border-radius: 25px;
-  font-family: "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 12px 24px;
   cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
   transition: all 0.3s ease;
   outline: none;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
 }
+
+.lang-toggle-button.en {
+  background-image: url('../img/us.png');
+}
+
+.lang-toggle-button.es {
+  background-image: url('../img/es.png');
+}
+
 .lang-toggle-button:before {
   content: "";
   position: absolute;
@@ -199,27 +208,30 @@ nav a:hover {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
 }
+
 .lang-toggle-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
+
 .lang-toggle-button:hover:before {
   left: 100%;
 }
+
 .lang-toggle-button:active {
   transform: translateY(1px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.clap-button {
-  background: linear-gradient(45deg, #ff512f, #f09819);
+.like-button{
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
   color: white;
   border: none;
   border-radius: 25px;
   font-family: "Helvetica Neue", sans-serif;
   font-weight: bold;
   font-size: 1rem;
-  padding: 12px 24px;
+  padding: 8px 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   outline: none;
@@ -227,7 +239,7 @@ nav a:hover {
   position: relative;
   overflow: hidden;
 }
-.clap-button:before {
+.like-button:before {
   content: "";
   position: absolute;
   top: 0;
@@ -237,46 +249,46 @@ nav a:hover {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
 }
-.clap-button:hover {
+.like-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
-.clap-button:hover:before {
+.like-button:hover:before {
   left: 100%;
 }
-.clap-button:active {
+.like-button:active {
   transform: translateY(1px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 @media (max-width: 768px) {
-  .clap-button body {
+  body {
     padding: 0 10px;
   }
-  .clap-button #container {
+  #container {
     padding: 20px;
     margin: 20px auto;
   }
-  .clap-button nav {
+  nav {
     flex-direction: column;
     gap: 15px;
     position: static;
   }
-  .clap-button .nav-links, .clap-button .nav-buttons {
+  .nav-links, .nav-buttons {
     flex-wrap: wrap;
     justify-content: center;
   }
-  .clap-button .nav-buttons button {
+  .nav-buttons button {
     width: 100%;
     max-width: 300px;
   }
-  .clap-button #nombre {
+  #nombre {
     padding-top: 20px;
   }
-  .clap-button #habilidades #habilidades_cuadros {
+  #habilidades #habilidades_cuadros {
     flex-direction: column;
     gap: 0;
   }
-  .clap-button #habilidades .cuadro_completo {
+  #habilidades .cuadro_completo {
     width: 100%;
     margin-bottom: 30px;
   }

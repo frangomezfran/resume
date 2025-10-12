@@ -13,13 +13,9 @@ const changeLanguage = async (language) => {
             element.innerHTML = data[key];
         }
     });
-    // Update the button text
     const langButton = document.getElementById('lang-toggle');
-    if (language === 'es') {
-        langButton.textContent = 'EN';
-    } else {
-        langButton.textContent = 'ES';
-    }
+    langButton.classList.toggle('en', language === 'en');
+    langButton.classList.toggle('es', language === 'es');
     currentLanguage = language;
 };
 
@@ -48,21 +44,20 @@ const firebaseConfig = {
 if (firebaseConfig && firebaseConfig.apiKey) {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
-  const clapButton = document.getElementById('clap-button');
+  const likeButton = document.getElementById('like-button');
   const counterRef = db.collection('claps').doc('counter');
 
   // Carga el contador inicial y escucha cambios en tiempo real
   counterRef.onSnapshot((doc) => {
     if (doc.exists) {
       const count = doc.data().count;
-      clapButton.innerHTML = `👏 ${count}`;
-    } else {
+      likeButton.innerHTML = `❤️ ${count}`;    } else {
       console.log("Counter document does not exist!");
     }
   });
 
   // Incrementa el contador cuando se hace clic
-  clapButton.addEventListener('click', () => {
+  likeButton.addEventListener('click', () => {
     // Usa la función de incremento transaccional de Firestore para evitar condiciones de carrera
     db.runTransaction((transaction) => {
       return transaction.get(counterRef).then((doc) => {
@@ -80,8 +75,8 @@ if (firebaseConfig && firebaseConfig.apiKey) {
 } else {
   console.warn("Firebase config is missing. Clap counter will not work.");
   // Opcional: Ocultar el botón si Firebase no está configurado
-  const clapButton = document.getElementById('clap-button');
-  if(clapButton) {
-    clapButton.style.display = 'none';
+  const likeButton = document.getElementById('like-button');
+  if(likeButton) {
+    likeButton.style.display = 'none';
   }
 }
