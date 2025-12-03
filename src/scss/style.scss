@@ -202,17 +202,17 @@ nav {
 
 // --- Button Styles (keep them as the highlight) ---
 .lang-toggle-button {
+  border: 1px solid rgba(255, 255, 255, 0.2); // Subtle border
   border-radius: 50%;
   width: 48px;
   height: 48px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-size: 60%;
+  background-size: 60%; // Adjust size to fit the flag well
   background-repeat: no-repeat;
   background-position: center;
-
+  background-color: transparent; // No background color
+  
   &.es {
     background-image: url("../img/es.png");
   }
@@ -221,14 +221,14 @@ nav {
   }
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); // Subtle hover effect
     transform: translateY(-2px);
   }
   &:active {
     transform: translateY(0);
     background-color: rgba(255, 255, 255, 0.15);
   }
-} // Added missing closing brace
+}
 .clap-button {
   background: linear-gradient(45deg, #6a11cb, #2575fc);
   color: white;
@@ -297,6 +297,7 @@ nav {
     #habilidades_cuadros {
       flex-direction: column;
       gap: 0;
+      align-items: center;
     }
 
     .cuadro_completo {
