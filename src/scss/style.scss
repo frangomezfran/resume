@@ -202,11 +202,39 @@ nav {
 
 // --- Button Styles (keep them as the highlight) ---
 .lang-toggle-button {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.es {
+    background-image: url("../img/es.png");
+  }
+  &.en {
+    background-image: url("../img/us.png");
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+} // Added missing closing brace
+.clap-button {
   background: linear-gradient(45deg, #6a11cb, #2575fc);
   color: white;
   border: none;
   border-radius: 25px;
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   font-weight: bold;
   font-size: 1rem;
   padding: 12px 24px;
@@ -216,9 +244,8 @@ nav {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
-
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -227,104 +254,54 @@ nav {
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
   }
-
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   }
-
   &:hover:before {
     left: 100%;
   }
-
   &:active {
     transform: translateY(1px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
 }
 
-.clap-button {
-  background: linear-gradient(45deg, #ff512f, #f09819);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-family: 'Helvetica Neue', sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  outline: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  }
-
-  &:hover:before {
-    left: 100%;
-  }
-
-  &:active {
-    transform: translateY(1px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  // --- Responsive Design ---
+// --- Responsive Design ---
 @media (max-width: 768px) {
-    body {
-      padding: 0 10px; // Reduce padding on smaller screens
-    }
+  body {
+    padding: 0 10px; // Reduce padding on smaller screens
+  }
 
-    #container {
-      padding: 20px;
-      margin: 20px auto;
-    }
+  #container {
+    padding: 20px;
+    margin: 20px auto;
+  }
 
-    nav {
+  nav {
+    flex-direction: column;
+    gap: 15px;
+    position: static; // On mobile, nav is not sticky to avoid taking up screen space
+  }
+
+  .nav-links, .nav-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #nombre {
+    padding-top: 20px; // Reset padding since nav is not sticky on mobile
+  }
+
+  #habilidades {
+    #habilidades_cuadros {
       flex-direction: column;
-      gap: 15px;
-      position: static; // On mobile, nav is not sticky to avoid taking up screen space
+      gap: 0;
     }
 
-    .nav-links, .nav-buttons {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .nav-buttons button {
-      width: 100%;
-      max-width: 300px;
-    }
-  
-    #nombre {
-      padding-top: 20px; // Reset padding since nav is not sticky on mobile
-    }
-
-    #habilidades {
-      #habilidades_cuadros {
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .cuadro_completo {
-        width: 100%; // Full width on mobile
-        margin-bottom: 30px;
-      }
+    .cuadro_completo {
+      width: 100%; // Full width on mobile
+      margin-bottom: 30px;
     }
   }
 }

@@ -174,56 +174,33 @@ nav a:hover {
 }
 
 .lang-toggle-button {
-  background: linear-gradient(45deg, #6a11cb, #2575fc);
-  border: none;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  background-size: 30px;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
   transition: all 0.3s ease;
-  outline: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
-.lang-toggle-button.en {
-  background-image: url('../img/us.png');
-}
-
 .lang-toggle-button.es {
-  background-image: url('../img/es.png');
+  background-image: url("../img/es.png");
 }
-
-.lang-toggle-button:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+.lang-toggle-button.en {
+  background-image: url("../img/us.png");
 }
-
 .lang-toggle-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
-
-.lang-toggle-button:hover:before {
-  left: 100%;
-}
-
 .lang-toggle-button:active {
-  transform: translateY(1px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
-.like-button{
+.clap-button {
   background: linear-gradient(45deg, #6a11cb, #2575fc);
   color: white;
   border: none;
@@ -231,7 +208,7 @@ nav a:hover {
   font-family: "Helvetica Neue", sans-serif;
   font-weight: bold;
   font-size: 1rem;
-  padding: 8px 16px;
+  padding: 12px 24px;
   cursor: pointer;
   transition: all 0.3s ease;
   outline: none;
@@ -239,7 +216,7 @@ nav a:hover {
   position: relative;
   overflow: hidden;
 }
-.like-button:before {
+.clap-button:before {
   content: "";
   position: absolute;
   top: 0;
@@ -249,17 +226,18 @@ nav a:hover {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
 }
-.like-button:hover {
+.clap-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
-.like-button:hover:before {
+.clap-button:hover:before {
   left: 100%;
 }
-.like-button:active {
+.clap-button:active {
   transform: translateY(1px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+
 @media (max-width: 768px) {
   body {
     padding: 0 10px;
@@ -276,10 +254,6 @@ nav a:hover {
   .nav-links, .nav-buttons {
     flex-wrap: wrap;
     justify-content: center;
-  }
-  .nav-buttons button {
-    width: 100%;
-    max-width: 300px;
   }
   #nombre {
     padding-top: 20px;

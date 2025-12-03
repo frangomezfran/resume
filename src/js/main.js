@@ -25,7 +25,7 @@ const toggleLanguage = () => {
 };
 
 // Initial language load
-changeLanguage('en');
+changeLanguage('es');
 
 
 // --- Firebase Clap Counter --- //
