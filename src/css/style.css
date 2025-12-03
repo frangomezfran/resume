@@ -174,16 +174,16 @@ nav a:hover {
 }
 
 .lang-toggle-button {
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   width: 48px;
   height: 48px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
 }
 .lang-toggle-button.es {
   background-image: url("../img/es.png");
@@ -261,6 +261,7 @@ nav a:hover {
   #habilidades #habilidades_cuadros {
     flex-direction: column;
     gap: 0;
+    align-items: center;
   }
   #habilidades .cuadro_completo {
     width: 100%;
