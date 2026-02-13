@@ -30,18 +30,10 @@ changeLanguage('es');
 
 // --- Firebase Clap Counter --- //
 
-// **PASO IMPORTANTE**: Pega aquí el objeto de configuración de Firebase que copiaste.
-const firebaseConfig = {
-  apiKey: "AIzaSyASecjTZKHw6RzkJTMt5GQgGhXNigGe88c",
-  authDomain: "resume-app-960e4.firebaseapp.com",
-  projectId: "resume-app-960e4",
-  storageBucket: "resume-app-960e4.firebasestorage.app",
-  messagingSenderId: "566896126889",
-  appId: "1:566896126889:web:38d049aeeff23e1871f2b8"
-};
+// El objeto firebaseConfig ahora se carga desde src/js/firebaseConfig.js
 
 // Inicializa Firebase solo si la configuración no está vacía
-if (firebaseConfig && firebaseConfig.apiKey) {
+if (typeof firebaseConfig !== 'undefined' && firebaseConfig && firebaseConfig.apiKey) {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
   const likeButton = document.getElementById('like-button');
@@ -51,7 +43,7 @@ if (firebaseConfig && firebaseConfig.apiKey) {
   counterRef.onSnapshot((doc) => {
     if (doc.exists) {
       const count = doc.data().count;
-      likeButton.innerHTML = `❤️ ${count}`;    } else {
+      likeButton.innerHTML = `❤️ ${count}`;    } else {
       console.log("Counter document does not exist!");
     }
   });

@@ -3,3 +3,7 @@ node_modules/
 npm-debug.log
 server.js
 package-lock.json
+
+# Archivos de configuración y secretos locales
+.env
+src/js/firebaseConfig.js
