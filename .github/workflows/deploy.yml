@@ -57,7 +57,7 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           # Sube todo el directorio raíz, ya que GitHub Pages servirá los archivos desde aquí
           path: '.'
