@@ -1,0 +1,68 @@
+# Workflow de GitHub Actions para construir y desplegar en GitHub Pages
+
+name: Deploy to GitHub Pages
+
+# Se ejecuta cada vez que haces un push a la rama "main"
+on:
+  push:
+    branches:
+      - main
+
+# Permisos necesarios para el token de GITHUB para que pueda desplegar a gh-pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Permite un solo despliegue concurrente, cancelando los anteriores
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Job de despliegue
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Clona tu repositorio
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 2. Configura Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # 3. Instala las dependencias (incluyendo dotenv)
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Genera el archivo de configuración de Firebase desde los Secretos
+      - name: Generate Firebase Config
+        run: npm run config
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+
+      # 5. Prepara el artefacto para el despliegue
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          # Sube todo el directorio raíz, ya que GitHub Pages servirá los archivos desde aquí
+          path: '.'
+
+      # 6. Despliega en GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
