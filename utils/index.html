@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title data-key="title">Franco Gomez - Utils</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🧑‍💻</text></svg>">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="../src/css/style.css">
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body id="container">
+  
+  <nav>
+    <div class="nav-links">
+      <a href="https://www.linkedin.com/in/frangomezfran/" target="_blank" data-key="nav_linkedin">LinkedIn</a>
+      <a href="https://github.com/frangomezfran" target="_blank" data-key="nav_github">GitHub</a>
+      <a href="https://gitlab.com/frangomezfran" target="_blank" data-key="nav_gitlab">GitLab</a>
+    </div>
+    <div class="nav-buttons">
+      <a href="../" class="resume-button" id="resume-nav-btn" title="Resume">💼</a>
+      <button id="lang-toggle" class="lang-toggle-button" onclick="toggleLanguage()"></button>
+      <button id="like-button" class="clap-button" title="Me gusta"><span class="clap-heart">❤️</span><span class="clap-count">0</span></button>
+    </div>
+  </nav>
+
+  <div id="utils-header" style="text-align: center; margin-bottom: 30px; padding-top: 40px;">
+    <h1 data-key="utils_title">Utilidades Diarias</h1>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="accordion-list">
+    
+    <!-- Calculadora de Fechas -->
+    <div class="accordion-item" data-tool="date-calculator">
+      <button class="accordion-header">
+        <span data-key="utils_date_calc_title">Calculadora de Fechas</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-body">
+          <div class="date-calculator">
+            
+            <!-- Tab Navigation (Centered) -->
+            <div class="calc-tabs">
+              <button class="tab-btn active" data-tab="count-days" data-key="date_tab_count">Contar días</button>
+              <button class="tab-btn" data-tab="add-days" data-key="date_tab_add">Añadir días</button>
+              <button class="tab-btn" data-tab="subtract-days" data-key="date_tab_subtract">Restar días</button>
+            </div>
+
+            <!-- Tab Content: Contar días -->
+            <div class="tab-content active" id="tab-count-days">
+              <div class="form-row-2col">
+                <div class="form-group-col">
+                  <div class="form-group-header">
+                    <label for="count-start-date" data-key="date_calc_start_date">Fecha de inicio</label>
+                    <button type="button" class="today-btn" data-target="count-start-date" data-key="date_btn_today">Hoy</button>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="count-start-date" class="datepicker-input" placeholder="Selecciona una fecha" readonly>
+                  </div>
+                </div>
+
+                <div class="form-group-col">
+                  <div class="form-group-header">
+                    <label for="count-end-date" data-key="date_calc_end_date">Fecha final</label>
+                    <button type="button" class="today-btn" data-target="count-end-date" data-key="date_btn_today">Hoy</button>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="count-end-date" class="datepicker-input" placeholder="Selecciona una fecha" readonly>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Días a excluir -->
+              <div class="exclude-days-section" style="margin: 10px 0 20px 0; width: 100%;">
+                <span class="exclude-title" style="display: block; font-weight: bold; font-size: 0.95rem; color: var(--text-main); margin-bottom: 12px;" data-key="date_exclude_title">Días a excluir</span>
+                <div class="exclude-days-pills">
+                  <button type="button" class="exclude-pill" data-day="1" data-key="day_mon">Lunes</button>
+                  <button type="button" class="exclude-pill" data-day="2" data-key="day_tue">Martes</button>
+                  <button type="button" class="exclude-pill" data-day="3" data-key="day_wed">Miércoles</button>
+                  <button type="button" class="exclude-pill" data-day="4" data-key="day_thu">Jueves</button>
+                  <button type="button" class="exclude-pill" data-day="5" data-key="day_fri">Viernes</button>
+                  <button type="button" class="exclude-pill" data-day="6" data-key="day_sat">Sábado</button>
+                  <button type="button" class="exclude-pill" data-day="0" data-key="day_sun">Domingo</button>
+                </div>
+              </div>
+
+              <div class="tool-action-row">
+                <button id="calc-duration-btn" class="calc-btn-full" data-key="date_btn_calc_duration">Calcular duración</button>
+                <button type="button" id="clear-date-duration-btn" class="tool-clear-btn" title="Limpiar todo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div id="duration-result-card" class="duration-results" style="display: none;">
+                <div class="result-item">
+                  <span class="result-label" data-key="res_label_days">Días entre dos fechas</span>
+                  <span class="result-value" id="res-days">-</span>
+                </div>
+                <div class="result-item">
+                  <span class="result-label" data-key="res_label_weeks">Semanas entre dos fechas</span>
+                  <span class="result-value" id="res-weeks">-</span>
+                </div>
+                <div class="result-item">
+                  <span class="result-label" data-key="res_label_months">Meses entre dos fechas</span>
+                  <span class="result-value" id="res-months">-</span>
+                </div>
+                <div class="result-item">
+                  <span class="result-label" data-key="res_label_years">Años entre dos fechas</span>
+                  <span class="result-value" id="res-years">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab Content: Añadir días -->
+            <div class="tab-content" id="tab-add-days">
+              <div class="form-group-header">
+                <label for="add-start-date" data-key="date_calc_start_date">Fecha de inicio</label>
+                <button type="button" class="today-btn" data-target="add-start-date" data-key="date_btn_today">Hoy</button>
+              </div>
+              <div class="form-group">
+                <input type="text" id="add-start-date" class="datepicker-input" placeholder="Selecciona una fecha" readonly>
+              </div>
+
+              <div class="time-grid">
+                <div class="form-group">
+                  <label for="add-years" data-key="time_years">Años</label>
+                  <input type="number" id="add-years" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="add-months" data-key="time_months">Meses</label>
+                  <input type="number" id="add-months" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="add-weeks" data-key="time_weeks">Semanas</label>
+                  <input type="number" id="add-weeks" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="add-days" data-key="time_days">Días</label>
+                  <input type="number" id="add-days" placeholder="0" min="0">
+                </div>
+              </div>
+
+              <div class="tool-action-row">
+                <button id="calc-add-btn" class="calc-btn-full" data-key="date_btn_calc_new_date">Calcular nueva fecha</button>
+                <button type="button" id="clear-date-add-btn" class="tool-clear-btn" title="Limpiar todo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                  </svg>
+                </button>
+              </div>
+              
+              <div id="add-result-box" class="date-result-box" style="display: none;"></div>
+            </div>
+
+            <div class="tab-content" id="tab-subtract-days">
+              <div class="form-group-header">
+                <label for="sub-start-date" data-key="date_calc_start_date">Fecha de inicio</label>
+                <button type="button" class="today-btn" data-target="sub-start-date" data-key="date_btn_today">Hoy</button>
+              </div>
+              <div class="form-group">
+                <input type="text" id="sub-start-date" class="datepicker-input" placeholder="Selecciona una fecha" readonly>
+              </div>
+
+              <div class="time-grid">
+                <div class="form-group">
+                  <label for="sub-years" data-key="time_years">Años</label>
+                  <input type="number" id="sub-years" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="sub-months" data-key="time_months">Meses</label>
+                  <input type="number" id="sub-months" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="sub-weeks" data-key="time_weeks">Semanas</label>
+                  <input type="number" id="sub-weeks" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="sub-days" data-key="time_days">Días</label>
+                  <input type="number" id="sub-days" placeholder="0" min="0">
+                </div>
+              </div>
+
+              <div class="tool-action-row">
+                <button id="calc-sub-btn" class="calc-btn-full" data-key="date_btn_calc_new_date">Calcular nueva fecha</button>
+                <button type="button" id="clear-date-sub-btn" class="tool-clear-btn" title="Limpiar todo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                  </svg>
+                </button>
+              </div>
+              
+              <div id="sub-result-box" class="date-result-box" style="display: none;"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculadora de Horas -->
+    <div class="accordion-item" data-tool="hours-calculator">
+      <button class="accordion-header">
+        <span data-key="utils_hours_calc_title">Calculadora de Horas</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-body">
+          <div class="hours-calculator">
+            <div class="hours-calc-layout">
+              <!-- Primer Valor de Tiempo -->
+              <div class="time-value-group">
+                <span class="value-title" data-key="hours_calc_value1">Primer valor de tiempo</span>
+                <div class="time-input-row">
+                  <div class="form-group">
+                    <label for="hours1" data-key="hours_calc_hours">Horas</label>
+                    <input type="number" id="hours1" placeholder="0" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="minutes1" data-key="hours_calc_minutes">Minutos</label>
+                    <input type="number" id="minutes1" placeholder="0" min="0" max="59">
+                  </div>
+                  <div class="form-group">
+                    <label for="seconds1" data-key="hours_calc_seconds">Segundos</label>
+                    <input type="number" id="seconds1" placeholder="0" min="0" max="59">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Operador (Sumar o Restar) -->
+              <div class="operation-selection-section">
+                <div class="operation-pills">
+                  <button type="button" class="op-pill active" data-op="sum" id="hours-op-sum" data-key="hours_calc_op_sum">Sumar (+)</button>
+                  <button type="button" class="op-pill" data-op="sub" id="hours-op-sub" data-key="hours_calc_op_sub">Restar (-)</button>
+                </div>
+              </div>
+
+              <!-- Segundo Valor de Tiempo -->
+              <div class="time-value-group">
+                <span class="value-title" data-key="hours_calc_value2">Segundo valor de tiempo</span>
+                <div class="time-input-row">
+                  <div class="form-group">
+                    <label for="hours2" data-key="hours_calc_hours">Horas</label>
+                    <input type="number" id="hours2" placeholder="0" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="minutes2" data-key="hours_calc_minutes">Minutos</label>
+                    <input type="number" id="minutes2" placeholder="0" min="0" max="59">
+                  </div>
+                  <div class="form-group">
+                    <label for="seconds2" data-key="hours_calc_seconds">Segundos</label>
+                    <input type="number" id="seconds2" placeholder="0" min="0" max="59">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Row: Calculate (95%) & Clear (5%) -->
+              <div class="tool-action-row">
+                <button id="calc-hours-btn" class="calc-btn-full" data-key="hours_calc_btn_calc">Calcular</button>
+                <button type="button" id="clear-hours-btn" class="tool-clear-btn" title="Limpiar todo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Resultado -->
+              <div id="hours-result-card" class="duration-results" style="display: none;">
+                <div class="result-item" style="border-right: none; padding-right: 0;">
+                  <span class="result-label" data-key="hours_calc_result_title">Resultado de la operación</span>
+                  <span class="result-value" id="hours-formatted-res">-</span>
+                  <span class="hours-text-desc" id="hours-text-res" style="font-size: 0.95rem; color: #979797; margin-top: 8px; font-weight: 500; display: block; text-transform: none;">-</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contador de Caracteres -->
+    <div class="accordion-item" data-tool="character-counter">
+      <button class="accordion-header">
+        <span data-key="utils_char_counter_title">Contador de caracteres</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-body">
+          <div class="character-counter">
+            <div class="char-counter-layout">
+              <div class="char-input-group">
+                <textarea id="char-input-text" data-key-placeholder="char_counter_placeholder" placeholder="Escribe o pega tu texto aquí para comenzar a contar..."></textarea>
+                <button type="button" id="char-clear-btn" class="char-clear-btn" data-key="char_counter_clear">Limpiar</button>
+              </div>
+              <div class="char-stats-grid">
+                <div class="char-stat-card">
+                  <span class="stat-label" data-key="char_counter_chars_with_spaces">Caracteres (con espacios)</span>
+                  <span class="stat-value" id="stat-chars-with-spaces">0</span>
+                </div>
+                <div class="char-stat-card">
+                  <span class="stat-label" data-key="char_counter_chars_no_spaces">Caracteres (sin espacios)</span>
+                  <span class="stat-value" id="stat-chars-no-spaces">0</span>
+                </div>
+                <div class="char-stat-card">
+                  <span class="stat-label" data-key="char_counter_words">Palabras</span>
+                  <span class="stat-value" id="stat-words">0</span>
+                </div>
+                <div class="char-stat-card">
+                  <span class="stat-label" data-key="char_counter_paragraphs">Párrafos</span>
+                  <span class="stat-value" id="stat-paragraphs">0</span>
+                </div>
+                <div class="char-stat-card">
+                  <span class="stat-label" data-key="char_counter_reading_time">Tiempo de lectura</span>
+                  <span class="stat-value"><span id="stat-reading-time">0</span> <span class="stat-unit" data-key="char_counter_minutes">min</span></span>
+                </div>
+                <div class="char-stat-card">
+                  <span class="stat-label" data-key="char_counter_speaking_time">Tiempo de oratoria</span>
+                  <span class="stat-value"><span id="stat-speaking-time">0</span> <span class="stat-unit" data-key="char_counter_minutes">min</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JSON Formatter -->
+    <div class="accordion-item" data-tool="json-formatter">
+      <button class="accordion-header">
+        <span data-key="utils_json_formatter_title">JSON Formatter</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-body">
+          <div class="under-development">
+            <span class="dev-icon">⚙️</span>
+            <p data-key="utils_in_progress">Esta funcionalidad está en proceso de desarrollo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JWT Encoder/Decoder -->
+    <div class="accordion-item" data-tool="jwt-codec">
+      <button class="accordion-header">
+        <span data-key="utils_jwt_codec_title">JWT Decoder / Encoder</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-body">
+          <div class="under-development">
+            <span class="dev-icon">⚙️</span>
+            <p data-key="utils_in_progress">Esta funcionalidad está en proceso de desarrollo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="../src/js/firebaseConfig.js"></script>
+  <!-- Flatpickr JS & Spanish translations -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+  <!-- Utility module scripts -->
+  <script src="../src/js/utils/date-calculator.js"></script>
+  <script src="../src/js/utils/hours-calculator.js"></script>
+  <script src="../src/js/utils/character-counter.js"></script>
+  <script src="../src/js/utils/json-formatter.js"></script>
+  <script src="../src/js/utils/jwt-codec.js"></script>
+  <!-- Main Orchestration -->
+  <script src="../src/js/utils-main.js"></script>
+</body>
+
+</html>

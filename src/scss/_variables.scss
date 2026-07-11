@@ -1,2 +1,29 @@
-$white: #f7f7f7;
-$black: #111111;
+@use "sass:color";
+
+// Urban Nocturne Color Palette
+$color-deep-black: #141414;
+$color-charcoal: #444444;
+$color-platinum: #D6D6D6;
+$color-lime: #E2E800;
+$color-lime-muted: #9ba000; // Muted lime for buttons so they aren't too bright
+$color-medium-gray: #979797;
+
+// Semantic variables for Dark Mode
+$bg-body: $color-deep-black;
+$bg-container: #1a1a1a; // slightly elevated matte black
+$text-main: $color-platinum;
+$text-muted: $color-medium-gray;
+$border-color: $color-charcoal;
+
+// Accent gradients and solid backgrounds
+$gradient-lime-gray: linear-gradient(45deg, $color-lime, $color-medium-gray);
+$gradient-charcoal-gray: linear-gradient(45deg, $color-charcoal, $color-medium-gray);
+$gradient-lime-charcoal: linear-gradient(45deg, $color-lime, $color-charcoal);
+
+$gradient-likes: $gradient-lime-gray;
+$gradient-utils: $gradient-charcoal-gray;
+$gradient-resume: $gradient-lime-charcoal;
+$gradient-text-accent: linear-gradient(45deg, $color-lime, #ffffff);
+
+// Muted green gradient for calculating button to prevent eye-strain
+$gradient-lime-muted: linear-gradient(45deg, #a2a700, #7a7e00);

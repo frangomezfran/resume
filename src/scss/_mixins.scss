@@ -1,7 +1,7 @@
 @mixin linea ($bottom) {
   content: '';
   position: absolute;
-  background: $black;
+  background: $color-dark-walnut;
   width: 95vw;
   height: 2px;
   left: 0;

@@ -43,7 +43,8 @@ if (typeof firebaseConfig !== 'undefined' && firebaseConfig && firebaseConfig.ap
   counterRef.onSnapshot((doc) => {
     if (doc.exists) {
       const count = doc.data().count;
-      likeButton.innerHTML = `❤️ ${count}`;    } else {
+      likeButton.innerHTML = `<span class="clap-heart">❤️</span><span class="clap-count">${count}</span>`;
+    } else {
       console.log("Counter document does not exist!");
     }
   });

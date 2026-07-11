@@ -8,10 +8,32 @@
   box-sizing: border-box;
 }
 
+/* Modern Custom Scrollbar for all elements */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: $color-deep-black;
+}
+::-webkit-scrollbar-thumb {
+  background: $color-charcoal;
+  border-radius: 4px;
+  &:hover {
+    background: $color-medium-gray;
+  }
+}
+
+html {
+  background-color: $bg-body;
+  scrollbar-width: thin;
+  scrollbar-color: $color-charcoal $color-deep-black;
+}
+
 body {
-  background: #ffffff; // Set to white to solve sticky-nav gap issue
-  color: #343a40; // Dark gray text
-  font-family: 'Helvetica', 'Arial', sans-serif; // Clean sans-serif for body
+  background: $bg-body; // Deep Matte Black (#141414)
+  color: $text-main; // Light Platinum Gray (#D6D6D6)
+  font-family: 'Helvetica', 'Arial', sans-serif;
   line-height: 1.6;
   padding: 0 20px;
 }
@@ -19,25 +41,26 @@ body {
 #container {
   max-width: 900px;
   margin: 40px auto;
-  background: #ffffff;
+  background: $bg-container; // Slightly elevated matte black (#1a1a1a)
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba($color-platinum, 0.05); // Subtle boundary
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); // Deep shadow
 }
 
 a {
-  color: #2575fc; // Use a shade from the button gradient
+  color: $color-lime; // Electric Lime Green (#E2E800)
   text-decoration: none;
   transition: color 0.3s ease;
   &:hover {
-    color: #6a11cb;
+    color: #ffffff;
   }
 }
 
 // --- Typography ---
 h1, h2, h3 {
-  font-family: 'Georgia', 'Times New Roman', serif; // Classic serif for headings
-  color: #212529;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: $text-main;
   margin-bottom: 0.75em;
 }
 
@@ -48,9 +71,11 @@ h1 {
 
 h2 {
   font-size: 2rem;
-  border-bottom: 2px solid #dee2e6;
-  padding-bottom: 0.5em;
-  margin-top: 1.5em;
+  border-bottom: 2px solid $color-charcoal; // Dark charcoal line
+  margin-top: 0;
+  padding-top: 2.2rem; // Centered space above text relative to section-divider
+  padding-bottom: 2.2rem; // Centered space below text relative to border-bottom
+  margin-bottom: 1.5rem;
 }
 
 h3 {
@@ -63,15 +88,17 @@ strong {
 
 // --- Navigation ---
 nav {
-  background: #212529; // Dark background for nav
+  background: rgba($color-deep-black, 0.85); // Transparent dark nav
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba($color-charcoal, 0.5);
   display: flex;
-  justify-content: space-between; // Align items to left and right
+  justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  border-radius: 12px; // Rounded corners for the floating effect
+  border-radius: 12px;
   
   position: sticky;
-  top: 20px; // Add space from the top when sticky
+  top: 20px;
   z-index: 1000;
 
   .nav-links, .nav-buttons {
@@ -80,15 +107,19 @@ nav {
     gap: 20px;
   }
 
+  .nav-buttons {
+    gap: 12px; // tighter gap for circular buttons
+  }
+
   a {
-    color: #f8f9fa; // Light color for nav links
+    color: $color-platinum;
     font-weight: bold;
     padding: 5px 10px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 
     &:hover {
-      background-color: #495057;
+      background-color: rgba(255, 255, 255, 0.05);
       color: #ffffff;
     }
   }
@@ -98,14 +129,14 @@ nav {
 #nombre {
   text-align: center;
   margin-bottom: 30px;
-  padding-top: 40px; // Increased padding to create more space below nav
+  padding-top: 40px;
   
   h1 {
     margin-bottom: 0.25em;
   }
   p {
     font-size: 1.1rem;
-    color: #6c757d;
+    color: $text-muted; // Medium gray (#979797)
   }
 }
 
@@ -119,8 +150,9 @@ nav {
 .section-divider {
   border: 0;
   height: 1px;
-  background-color: #e9ecef;
-  margin: 40px 0;
+  background-color: $color-charcoal;
+  margin-top: 40px;
+  margin-bottom: 0; // cooperates with H2 padding-top for mathematical centering
 }
 
 // --- Skills Section ---
@@ -132,28 +164,33 @@ nav {
     display: flex;
     justify-content: space-between;
     gap: 40px;
+    padding-left: 15px;
 
     .cuadro_completo {
-      width: 48%; // Assign roughly half the width to each column
+      width: 48%;
     }
   }
   .cuadro {
     display: flex;
-    flex-wrap: wrap; // Make items wrap to create the dynamic box
-    gap: 10px; // Gap between items
+    flex-wrap: wrap;
+    gap: 10px;
     align-items: flex-start;
 
     p {
-      background-color: #e9ecef;
+      background-color: rgba(255, 255, 255, 0.03);
+      color: $text-main;
       padding: 5px 12px;
       border-radius: 15px;
       font-size: 1rem;
       transition: all 0.2s ease-in-out;
+      border: 1px solid $color-charcoal;
 
       &:hover {
         transform: translateY(-2px);
-        filter: brightness(95%);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        background-color: rgba(226, 232, 0, 0.15); // Lime hover highlight
+        border-color: $color-lime;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(226, 232, 0, 0.2);
       }
     }
   }
@@ -170,8 +207,9 @@ nav {
 
     &:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      border-color: #dee2e6;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      border-color: $color-charcoal;
+      background: rgba(255, 255, 255, 0.02);
     }
   }
 
@@ -183,10 +221,14 @@ nav {
     a {
       font-size: 1.2rem;
       font-weight: bold;
+      color: $color-lime;
+      &:hover {
+        color: #ffffff;
+      }
     }
     p {
       font-style: italic;
-      color: #6c757d;
+      color: $text-muted;
     }
   }
 
@@ -195,55 +237,34 @@ nav {
       display: block;
       margin-bottom: 5px;
       font-size: 1.1rem;
-      color: #495057;
+      color: $text-main;
     }
   }
 }
 
-// --- Button Styles (keep them as the highlight) ---
-.lang-toggle-button {
-  border: 1px solid rgba(255, 255, 255, 0.2); // Subtle border
-  border-radius: 50%;
+// --- Button Styles ---
+// Circular Nav Button Base
+.lang-toggle-button, .utils-button, .resume-button, .clap-button {
   width: 48px;
   height: 48px;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem; // large icon size
+  line-height: 1;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-size: 60%; // Adjust size to fit the flag well
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent; // No background color
-  
-  &.es {
-    background-image: url("../img/es.png");
-  }
-  &.en {
-    background-image: url("../img/us.png");
-  }
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1); // Subtle hover effect
-    transform: translateY(-2px);
-  }
-  &:active {
-    transform: translateY(0);
-    background-color: rgba(255, 255, 255, 0.15);
-  }
-}
-.clap-button {
-  background: linear-gradient(45deg, #6a11cb, #2575fc);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-family: "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important; // same transparent/white border as language toggle
+  background-color: transparent !important;
   outline: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+
   &:before {
     content: "";
     position: absolute;
@@ -254,55 +275,928 @@ nav {
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
   }
+
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.1) !important;
   }
+
   &:hover:before {
     left: 100%;
   }
+
   &:active {
     transform: translateY(1px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
 }
 
-// --- Responsive Design ---
-@media (max-width: 768px) {
-  body {
-    padding: 0 10px; // Reduce padding on smaller screens
+.lang-toggle-button {
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  &.es {
+    background-image: url("../img/ar.png");
+  }
+  &.en {
+    background-image: url("../img/us.png");
+  }
+}
+
+.clap-button {
+  background: $gradient-likes !important; // Lime-Gray gradient
+  color: $color-deep-black !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba($color-lime, 0.32);
+  
+  // Heart and count stacked vertically
+  flex-direction: column;
+  gap: 2px;
+
+  .clap-heart {
+    font-size: 1.25rem; // slightly larger heart!
+    margin-right: 0 !important;
+    line-height: 1;
+    transition: transform 0.2s ease;
   }
 
-  #container {
-    padding: 20px;
-    margin: 20px auto;
+  .clap-count {
+    font-size: 0.7rem; // small clean count below the heart
+    font-weight: bold;
+    line-height: 1;
   }
 
-  nav {
-    flex-direction: column;
-    gap: 15px;
-    position: static; // On mobile, nav is not sticky to avoid taking up screen space
+  &:hover {
+    background: $gradient-likes !important; // keep original gradient on hover
+    color: $color-deep-black !important;
+    box-shadow: 0 8px 25px rgba($color-lime, 0.4);
+    .clap-heart {
+      transform: scale(1.25); // cool micro-animation
+    }
+  }
+}
+
+.utils-button, .resume-button {
+  color: $color-platinum !important;
+  
+  &:hover {
+    color: #ffffff !important;
+  }
+}
+
+// --- Accordion / Daily Utilities ---
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+  padding-left: 0; // Removed 15px padding-left to align perfectly with Navbar and Container boundaries!
+}
+
+.accordion-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid $color-charcoal;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &.active {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    border-color: $color-medium-gray;
+    overflow: visible !important; // Allow Flatpickr to spill out without clipping!
+  }
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 18px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: none;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // clean Sans-Serif font to match fields
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: $text-main;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
   }
 
-  .nav-links, .nav-buttons {
-    flex-wrap: wrap;
+  .accordion-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  &.active .accordion-icon {
+    transform: rotate(180deg);
+  }
+}
+
+// Modern, ultra-smooth CSS Grid transition for auto height accordions
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr; // height starts at 0
+  transition: grid-template-rows 0.35s ease;
+  overflow: hidden;
+  background: transparent;
+
+  &.open {
+    grid-template-rows: 1fr; // height expands to exactly fit auto content size smoothly!
+    overflow: visible !important; // Allow Flatpickr popup to spill out
+  }
+
+  .accordion-body {
+    min-height: 0; // Required for grid row height animation to compute correctly
+    padding: 24px;
+    border-top: 1px solid $color-charcoal;
+    opacity: 0; // Fade content in/out concurrently
+    transition: opacity 0.25s ease;
+  }
+
+  &.open .accordion-body {
+    opacity: 1;
+  }
+}
+
+// --- Under Development / Construction ---
+.under-development {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  color: $text-muted;
+  font-style: italic;
+
+  .dev-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    animation: pulse 2s infinite ease-in-out;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+// Header h1 on Utils page
+#utils-header h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // clean Sans-Serif font
+  font-weight: bold;
+}
+
+// --- Date Calculator Widget ---
+.date-calculator, .hours-calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  .tool-action-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+
+    .calc-btn-full {
+      flex: 1;
+      margin: 0 !important;
+    }
+  }
+
+  .tool-clear-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid $color-charcoal;
+    color: $text-muted;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-  }
+    flex-shrink: 0;
+    transition: all 0.2s ease-in-out;
+    outline: none;
 
-  #nombre {
-    padding-top: 20px; // Reset padding since nav is not sticky on mobile
-  }
-
-  #habilidades {
-    #habilidades_cuadros {
-      flex-direction: column;
-      gap: 0;
-      align-items: center;
+    &:hover {
+      border-color: $color-lime;
+      color: $color-lime;
+      background-color: rgba(226, 232, 0, 0.05);
     }
 
-    .cuadro_completo {
-      width: 100%; // Full width on mobile
-      margin-bottom: 30px;
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  // Two-column responsive row
+  .form-row-2col {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    
+    .form-group-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    @media (max-width: 576px) {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+
+  // Tabs (Centered)
+  .calc-tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid $color-charcoal;
+    margin-bottom: 25px; // increased margin to let reset buttons float clearly
+    gap: 15px;
+
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.3rem; // enlarged font size
+      font-weight: bold;
+      color: $text-muted;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s ease;
+      font-family: inherit;
+
+      &:hover {
+        color: $text-main;
+      }
+
+      &.active {
+        color: $color-lime;
+        
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: $color-lime;
+        }
+      }
+    }
+  }
+
+  // Tab Content Visibility
+  .tab-content {
+    display: none;
+    
+    &.active {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+
+  // Form elements
+  .form-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 5px;
+
+    label {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: $text-main;
+    }
+
+    .today-btn {
+      background: none;
+      border: none;
+      color: $text-muted;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+
+      &:hover {
+        color: $color-lime;
+      }
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+
+    label {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: $text-main;
+    }
+
+    input[type="text"], input[type="number"], select {
+      padding: 12px 16px;
+      font-size: 1rem;
+      border: 1px solid $color-charcoal;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.03); // dark input
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-family: inherit;
+      color: $text-main;
+
+      &:focus {
+        border-color: $color-lime;
+        box-shadow: 0 0 0 3px rgba(226, 232, 0, 0.15);
+      }
+    }
+  }
+
+  // Hide native spinners for input[type="number"]
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+
+  // Placeholder Warning style (Validation error)
+  .datepicker-input.input-error, input.input-error {
+    border-color: #ff3333 !important;
+    box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.2) !important;
+    
+    &::placeholder {
+      color: #ff3333 !important;
+    }
+  }
+
+  // Sub-grid for input numbers (Años, Meses, Semanas, Días)
+  .time-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+
+    @media (max-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .exclude-days-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centered
+    text-align: center;
+    width: 100%;
+
+    .exclude-title {
+      display: block;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: $text-main;
+      margin-bottom: 12px;
+    }
+
+    .exclude-days-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center; // Centered
+    }
+  }
+
+  // Modern Pills styles for selection (Días Excluidos)
+  .exclude-pill {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid $color-charcoal;
+    color: $text-muted;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    font-family: inherit;
+
+    &:hover {
+      border-color: $color-lime;
+      color: $color-lime;
+      background-color: rgba(226, 232, 0, 0.05);
+    }
+
+    &.active {
+      background: $color-lime-muted; // Muted lime background to prevent eye strain
+      border-color: transparent;
+      color: $color-deep-black; // High contrast dark text
+      box-shadow: 0 4px 10px rgba(155, 160, 0, 0.25);
+
+      &:hover {
+        color: $color-deep-black;
+        box-shadow: 0 6px 15px rgba(155, 160, 0, 0.35);
+      }
+    }
+  }
+
+  // Action Button (Full Width Muted Lime Green to prevent eye-strain)
+  .calc-btn-full {
+    background: $gradient-lime-muted; // Darker/muted lime gradient
+    color: $color-deep-black;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.05rem;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(155, 160, 0, 0.25);
+    text-align: center;
+    width: 100%;
+
+    &:hover {
+      color: $color-deep-black;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(155, 160, 0, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Duration calculations results block (Side-by-side row card)
+  .duration-results {
+    background: rgba(255, 255, 255, 0.02); 
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row; // Side-by-side row!
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid $color-charcoal;
+
+    .result-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid $color-charcoal; // Vertical separators!
+      padding-right: 15px;
+      text-align: center;
+
+      &:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+
+      .result-label {
+        font-size: 0.8rem;
+        color: $text-muted;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: bold;
+      }
+
+      .result-value {
+        font-size: 2.2rem;
+        font-weight: 800;
+        font-family: inherit;
+        background: $gradient-text-accent; // Lime to White glowing text
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    @media (max-width: 576px) {
+      flex-direction: column; // Stack on small mobile screens
+      
+      .result-item {
+        border-right: none;
+        border-bottom: 1px solid $color-charcoal !important;
+        padding-right: 0;
+        padding-bottom: 15px !important;
+        width: 100%;
+        
+        &:last-child {
+          border-bottom: none !important;
+          padding-bottom: 0 !important;
+        }
+      }
+    }
+  }
+
+  // Styled result box for add/subtract (Light cohesive panel)
+  .date-result-box {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    padding: 24px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: inherit;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid $color-charcoal;
+    background: $gradient-text-accent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    &.error {
+      background: rgba(127, 29, 29, 0.2);
+      color: #fee2e2;
+      -webkit-text-fill-color: initial;
+      font-size: 1.1rem;
+      font-weight: normal;
+      border-color: #7f1d1d;
     }
   }
 }
+
+// Flatpickr Dropdown Custom Theme Overrides (Modern, borderless, matching Urban Nocturne)
+.flatpickr-calendar {
+  background: #1a1a1a !important; // elevated matte black
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid $color-charcoal !important;
+  border-radius: 12px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+
+  .flatpickr-months {
+    background: transparent !important;
+    padding-top: 5px !important;
+    
+    .flatpickr-prev-month, .flatpickr-next-month {
+      color: $text-muted !important;
+      fill: $text-muted !important;
+      
+      &:hover {
+        color: $color-lime !important;
+        svg {
+          fill: $color-lime !important;
+        }
+      }
+    }
+  }
+
+  .flatpickr-current-month {
+    color: $text-main !important;
+    font-size: 1.1rem !important;
+    position: absolute !important;
+    width: 75% !important;
+    left: 12.5% !important;
+    text-align: center !important;
+    height: 30px !important;
+    line-height: 22px !important;
+    
+    // Align select and year input perfectly side-by-side
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+
+    select.flatpickr-monthDropdown-months {
+      background: #1a1a1a !important;
+      color: $text-main !important;
+      font-weight: bold !important;
+      border: 1px solid $color-charcoal !important;
+      border-radius: 6px !important;
+      padding: 3px 8px !important;
+      cursor: pointer !important;
+      outline: none !important;
+      font-family: inherit !important;
+      font-size: 0.95rem !important;
+      width: auto !important;
+
+      option {
+        background: #1a1a1a !important;
+        color: $text-main !important;
+        padding: 6px 10px !important;
+        cursor: pointer;
+
+        &:hover, &:focus {
+          background-color: rgba(226, 232, 0, 0.15) !important;
+          color: #ffffff !important;
+        }
+      }
+
+      &:hover {
+        background: rgba(255,255,255,0.05) !important;
+      }
+    }
+
+    .numInputWrapper {
+      width: 75px !important; // Sufficient width to prevent crop of the year text
+      display: inline-block !important;
+
+      span {
+        display: none !important; // hide up/down spin buttons
+      }
+
+      input.numInput {
+        -moz-appearance: textfield !important;
+        background: #1a1a1a !important;
+        color: $text-main !important;
+        font-weight: bold !important;
+        border: 1px solid $color-charcoal !important;
+        border-radius: 6px !important;
+        padding: 3px 6px !important;
+        font-family: inherit !important;
+        font-size: 0.95rem !important;
+        outline: none !important;
+        text-align: center !important;
+        width: 100% !important;
+
+        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+          -webkit-appearance: none !important;
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+
+  .flatpickr-weekday {
+    background: transparent !important;
+    color: $text-muted !important;
+    font-weight: bold !important;
+  }
+
+  .flatpickr-day {
+    color: $text-muted !important;
+    border-radius: 6px !important;
+    transition: all 0.15s ease !important;
+    
+    &:hover, &.prevMonthDay:hover, &.nextMonthDay:hover {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border-color: transparent !important;
+      color: $color-lime !important;
+    }
+
+    &.today {
+      border-color: $color-medium-gray !important;
+      
+      &:hover {
+        background: $color-medium-gray !important;
+        color: #141414 !important;
+      }
+    }
+
+    &.selected {
+      background: $color-lime !important;
+      border-color: $color-lime !important;
+      color: #141414 !important;
+      font-weight: bold !important;
+    }
+
+    &.flatpickr-disabled {
+      color: rgba(255, 255, 255, 0.15) !important;
+      &:hover {
+        background: transparent !important;
+        color: rgba(255, 255, 255, 0.15) !important;
+      }
+    }
+  }
+
+  .flatpickr-innerContainer {
+    padding-top: 5px !important;
+  }
+
+  .flatpickr-months .flatpickr-month {
+    position: static !important;
+  }
+}
+
+// --- Character Counter Widget ---
+.character-counter {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  width: 100%;
+
+  .char-counter-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .char-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    textarea {
+      width: 100%;
+      height: 160px;
+      min-height: 120px;
+      max-height: 350px;
+      padding: 16px;
+      font-size: 1rem;
+      border: 1px solid $color-charcoal;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.03);
+      color: $text-main;
+      outline: none;
+      resize: vertical;
+      font-family: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: $color-lime;
+        box-shadow: 0 0 0 3px rgba(226, 232, 0, 0.15);
+      }
+    }
+
+    .char-clear-btn {
+      align-self: flex-end;
+      background: transparent;
+      border: 1px solid $color-charcoal;
+      color: $text-muted;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        border-color: $color-lime;
+        color: $color-lime;
+        background-color: rgba(226, 232, 0, 0.05);
+      }
+      
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+
+  .char-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .char-stat-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid $color-charcoal;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      border-color: rgba($color-lime, 0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: $text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: $gradient-text-accent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      
+      .stat-unit {
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin-left: 2px;
+        color: $text-muted;
+        -webkit-text-fill-color: initial;
+      }
+    }
+  }
+}
+
+// --- Hours Calculator Widget ---
+.hours-calculator {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  width: 100%;
+
+  .hours-calc-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .time-value-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .value-title {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: $text-main;
+    }
+
+    .time-input-row {
+      display: flex;
+      gap: 15px;
+      width: 100%;
+
+      .form-group {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      @media (max-width: 480px) {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  }
+
+  .operation-selection-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 8px 0;
+
+    .operation-pills {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .op-pill {
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid $color-charcoal;
+      color: $text-muted;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease-in-out;
+      outline: none;
+
+      &:hover {
+        border-color: $color-lime;
+        color: $color-lime;
+        background-color: rgba(226, 232, 0, 0.05);
+      }
+
+      &.active {
+        background: $color-lime-muted;
+        border-color: transparent;
+        color: $color-deep-black;
+        box-shadow: 0 4px 10px rgba(155, 160, 0, 0.25);
+
+        &:hover {
+          color: $color-deep-black;
+          box-shadow: 0 6px 15px rgba(155, 160, 0, 0.35);
+        }
+      }
+    }
+  }
+
+}
+
+
