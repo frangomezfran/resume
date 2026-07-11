@@ -48,6 +48,16 @@ body {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); // Deep shadow
 }
 
+@media (max-width: 576px) {
+  body {
+    padding: 0 10px;
+  }
+  #container {
+    margin: 15px auto;
+    padding: 20px 15px;
+  }
+}
+
 a {
   color: $color-lime; // Electric Lime Green (#E2E800)
   text-decoration: none;
@@ -121,6 +131,18 @@ nav {
     &:hover {
       background-color: rgba(255, 255, 255, 0.05);
       color: #ffffff;
+    }
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
   }
 }
@@ -418,6 +440,10 @@ nav {
     border-top: 1px solid $color-charcoal;
     opacity: 0; // Fade content in/out concurrently
     transition: opacity 0.25s ease;
+
+    @media (max-width: 576px) {
+      padding: 16px;
+    }
   }
 
   &.open .accordion-body {
@@ -471,7 +497,18 @@ nav {
 
     .calc-btn-full {
       flex: 1;
+      width: auto !important;
       margin: 0 !important;
+
+      @media (max-width: 576px) {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      gap: 8px;
+      margin-top: 8px;
     }
   }
 
@@ -500,6 +537,16 @@ nav {
     &:active {
       transform: scale(0.95);
     }
+
+    @media (max-width: 576px) {
+      width: 44px;
+      height: 44px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
 
   // Two-column responsive row
@@ -513,6 +560,7 @@ nav {
       display: flex;
       flex-direction: column;
       gap: 5px;
+      min-width: 0;
     }
 
     @media (max-width: 576px) {
@@ -606,6 +654,7 @@ nav {
     flex-direction: column;
     gap: 6px;
     width: 100%;
+    min-width: 0;
 
     label {
       font-size: 0.9rem;
@@ -621,6 +670,7 @@ nav {
       background-color: rgba(255, 255, 255, 0.03); // dark input
       outline: none;
       width: 100%;
+      min-width: 0;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
       font-family: inherit;
       color: $text-main;
@@ -683,6 +733,7 @@ nav {
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center; // Centered
+      width: 100%;
     }
   }
 
