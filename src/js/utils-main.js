@@ -63,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Close all other accordion items
             document.querySelectorAll('.accordion-item').forEach(otherItem => {
                 if (otherItem !== item) {
+                    if (otherItem.getAttribute('data-tool') === 'minute-timer' && typeof window.resetMinuteTimer === 'function') {
+                        window.resetMinuteTimer();
+                    }
                     otherItem.classList.remove('active');
                     otherItem.querySelector('.accordion-header').classList.remove('active');
                     otherItem.querySelector('.accordion-content').classList.remove('open');
@@ -71,6 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Toggle current item
             if (isActive) {
+                if (item.getAttribute('data-tool') === 'minute-timer' && typeof window.resetMinuteTimer === 'function') {
+                    window.resetMinuteTimer();
+                }
                 item.classList.remove('active');
                 this.classList.remove('active');
                 content.classList.remove('open');
@@ -85,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.initDateCalculator();
                 } else if (toolId === 'hours-calculator' && typeof window.initHoursCalculator === 'function') {
                     window.initHoursCalculator();
+                } else if (toolId === 'minute-timer' && typeof window.initMinuteTimer === 'function') {
+                    window.initMinuteTimer();
                 } else if (toolId === 'character-counter' && typeof window.initCharacterCounter === 'function') {
                     window.initCharacterCounter();
                 } else if (toolId === 'json-formatter' && typeof window.initJsonFormatter === 'function') {

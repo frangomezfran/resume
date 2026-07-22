@@ -338,69 +338,146 @@ nav a:hover {
 
 .accordion-item {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid #444444;
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.accordion-item:hover {
+  border-color: rgba(226, 232, 0, 0.3);
+  background: rgba(255, 255, 255, 0.035);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 .accordion-item.active {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-  border-color: #979797;
+  border-color: #E2E800;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(226, 232, 0, 0.1);
+  transform: none;
   overflow: visible !important;
 }
 
 .accordion-header {
   width: 100%;
-  padding: 18px 24px;
-  background: rgba(255, 255, 255, 0.02);
+  padding: 16px 20px;
+  background: transparent;
   border: none;
-  text-align: left;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 1.25rem;
-  font-weight: bold;
   color: #D6D6D6;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background 0.3s ease;
+  outline: none;
 }
-.accordion-header:hover {
-  background: rgba(255, 255, 255, 0.05);
+.accordion-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+}
+.accordion-header .accordion-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: #979797;
+  flex-shrink: 0;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.accordion-header .accordion-badge svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s ease;
+}
+.accordion-header:hover .accordion-badge {
+  border-color: rgba(226, 232, 0, 0.4);
+  background: rgba(226, 232, 0, 0.05);
+  color: #E2E800;
+}
+.accordion-header.active .accordion-badge {
+  border-color: #E2E800;
+  background: rgba(226, 232, 0, 0.08);
+  color: #E2E800;
+}
+.accordion-header .accordion-header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin: 0;
+}
+.accordion-header .accordion-title {
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: #D6D6D6;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}
+.accordion-header .accordion-subtitle {
+  font-size: 0.82rem;
+  color: #979797;
+  margin-top: 4px;
+  margin-bottom: 0;
+  line-height: 1.2;
+  padding: 0;
 }
 .accordion-header .accordion-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
+  font-size: 1.1rem;
+  color: #979797;
+  transition: transform 0.3s ease, color 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 10px;
 }
 .accordion-header.active .accordion-icon {
   transform: rotate(180deg);
+  color: #E2E800;
 }
 
 .accordion-content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s ease;
+  transition: grid-template-rows 0.35s ease, visibility 0.35s ease;
   overflow: hidden;
   background: transparent;
+  visibility: hidden;
 }
 .accordion-content.open {
   grid-template-rows: 1fr;
+  visibility: visible;
   overflow: visible !important;
 }
 .accordion-content .accordion-body {
   min-height: 0;
-  padding: 24px;
-  border-top: 1px solid #444444;
+  padding: 0 24px;
+  border-top: none;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, padding 0.35s ease;
 }
 @media (max-width: 576px) {
   .accordion-content .accordion-body {
-    padding: 16px;
+    padding: 0 16px;
   }
 }
 .accordion-content.open .accordion-body {
   opacity: 1;
+  padding: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+@media (max-width: 576px) {
+  .accordion-content.open .accordion-body {
+    padding: 16px;
+  }
 }
 
 .under-development {
@@ -438,37 +515,37 @@ nav a:hover {
   font-weight: bold;
 }
 
-.date-calculator, .hours-calculator {
+.date-calculator, .hours-calculator, .minute-timer-layout {
   display: flex;
   flex-direction: column;
   gap: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
-.date-calculator .tool-action-row, .hours-calculator .tool-action-row {
+.date-calculator .tool-action-row, .hours-calculator .tool-action-row, .minute-timer-layout .tool-action-row {
   display: flex;
   gap: 10px;
   width: 100%;
   align-items: center;
   margin-top: 10px;
 }
-.date-calculator .tool-action-row .calc-btn-full, .hours-calculator .tool-action-row .calc-btn-full {
+.date-calculator .tool-action-row .calc-btn-full, .hours-calculator .tool-action-row .calc-btn-full, .minute-timer-layout .tool-action-row .calc-btn-full {
   flex: 1;
   width: auto !important;
   margin: 0 !important;
 }
 @media (max-width: 576px) {
-  .date-calculator .tool-action-row .calc-btn-full, .hours-calculator .tool-action-row .calc-btn-full {
+  .date-calculator .tool-action-row .calc-btn-full, .hours-calculator .tool-action-row .calc-btn-full, .minute-timer-layout .tool-action-row .calc-btn-full {
     padding: 12px 14px;
     font-size: 0.95rem;
   }
 }
 @media (max-width: 576px) {
-  .date-calculator .tool-action-row, .hours-calculator .tool-action-row {
+  .date-calculator .tool-action-row, .hours-calculator .tool-action-row, .minute-timer-layout .tool-action-row {
     gap: 8px;
     margin-top: 8px;
   }
 }
-.date-calculator .tool-clear-btn, .hours-calculator .tool-clear-btn {
+.date-calculator .tool-clear-btn, .hours-calculator .tool-clear-btn, .minute-timer-layout .tool-clear-btn {
   width: 48px;
   height: 48px;
   border-radius: 8px;
@@ -484,30 +561,53 @@ nav a:hover {
   transition: all 0.2s ease-in-out;
   outline: none;
 }
-.date-calculator .tool-clear-btn:hover, .hours-calculator .tool-clear-btn:hover {
+.date-calculator .tool-clear-btn:hover, .hours-calculator .tool-clear-btn:hover, .minute-timer-layout .tool-clear-btn:hover {
   border-color: #E2E800;
   color: #E2E800;
   background-color: rgba(226, 232, 0, 0.05);
 }
-.date-calculator .tool-clear-btn:active, .hours-calculator .tool-clear-btn:active {
+.date-calculator .tool-clear-btn:active, .hours-calculator .tool-clear-btn:active, .minute-timer-layout .tool-clear-btn:active {
   transform: scale(0.95);
 }
 @media (max-width: 576px) {
-  .date-calculator .tool-clear-btn, .hours-calculator .tool-clear-btn {
+  .date-calculator .tool-clear-btn, .hours-calculator .tool-clear-btn, .minute-timer-layout .tool-clear-btn {
     width: 44px;
     height: 44px;
   }
-  .date-calculator .tool-clear-btn svg, .hours-calculator .tool-clear-btn svg {
+  .date-calculator .tool-clear-btn svg, .hours-calculator .tool-clear-btn svg, .minute-timer-layout .tool-clear-btn svg {
     width: 16px;
     height: 16px;
   }
 }
-.date-calculator .form-row-2col, .hours-calculator .form-row-2col {
+.date-calculator .time-input-row, .hours-calculator .time-input-row, .minute-timer-layout .time-input-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 15px;
+  width: 100%;
+}
+.date-calculator .time-input-row .form-group, .hours-calculator .time-input-row .form-group, .minute-timer-layout .time-input-row .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+@media (max-width: 576px) {
+  .date-calculator .time-input-row, .hours-calculator .time-input-row, .minute-timer-layout .time-input-row {
+    gap: 8px;
+  }
+  .date-calculator .time-input-row input[type=number], .hours-calculator .time-input-row input[type=number], .minute-timer-layout .time-input-row input[type=number] {
+    padding: 10px 8px;
+    text-align: center;
+  }
+}
+.date-calculator .form-row-2col, .hours-calculator .form-row-2col, .minute-timer-layout .form-row-2col {
   display: flex;
   gap: 20px;
   width: 100%;
 }
-.date-calculator .form-row-2col .form-group-col, .hours-calculator .form-row-2col .form-group-col {
+.date-calculator .form-row-2col .form-group-col, .hours-calculator .form-row-2col .form-group-col, .minute-timer-layout .form-row-2col .form-group-col {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -515,19 +615,19 @@ nav a:hover {
   min-width: 0;
 }
 @media (max-width: 576px) {
-  .date-calculator .form-row-2col, .hours-calculator .form-row-2col {
+  .date-calculator .form-row-2col, .hours-calculator .form-row-2col, .minute-timer-layout .form-row-2col {
     flex-direction: column;
     gap: 15px;
   }
 }
-.date-calculator .calc-tabs, .hours-calculator .calc-tabs {
+.date-calculator .calc-tabs, .hours-calculator .calc-tabs, .minute-timer-layout .calc-tabs {
   display: flex;
   justify-content: center;
   border-bottom: 2px solid #444444;
   margin-bottom: 25px;
   gap: 15px;
 }
-.date-calculator .calc-tabs .tab-btn, .hours-calculator .calc-tabs .tab-btn {
+.date-calculator .calc-tabs .tab-btn, .hours-calculator .calc-tabs .tab-btn, .minute-timer-layout .calc-tabs .tab-btn {
   background: none;
   border: none;
   padding: 10px 20px;
@@ -539,13 +639,13 @@ nav a:hover {
   transition: color 0.2s ease;
   font-family: inherit;
 }
-.date-calculator .calc-tabs .tab-btn:hover, .hours-calculator .calc-tabs .tab-btn:hover {
+.date-calculator .calc-tabs .tab-btn:hover, .hours-calculator .calc-tabs .tab-btn:hover, .minute-timer-layout .calc-tabs .tab-btn:hover {
   color: #D6D6D6;
 }
-.date-calculator .calc-tabs .tab-btn.active, .hours-calculator .calc-tabs .tab-btn.active {
+.date-calculator .calc-tabs .tab-btn.active, .hours-calculator .calc-tabs .tab-btn.active, .minute-timer-layout .calc-tabs .tab-btn.active {
   color: #E2E800;
 }
-.date-calculator .calc-tabs .tab-btn.active:after, .hours-calculator .calc-tabs .tab-btn.active:after {
+.date-calculator .calc-tabs .tab-btn.active:after, .hours-calculator .calc-tabs .tab-btn.active:after, .minute-timer-layout .calc-tabs .tab-btn.active:after {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -554,26 +654,26 @@ nav a:hover {
   height: 2px;
   background-color: #E2E800;
 }
-.date-calculator .tab-content, .hours-calculator .tab-content {
+.date-calculator .tab-content, .hours-calculator .tab-content, .minute-timer-layout .tab-content {
   display: none;
 }
-.date-calculator .tab-content.active, .hours-calculator .tab-content.active {
+.date-calculator .tab-content.active, .hours-calculator .tab-content.active, .minute-timer-layout .tab-content.active {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-.date-calculator .form-group-header, .hours-calculator .form-group-header {
+.date-calculator .form-group-header, .hours-calculator .form-group-header, .minute-timer-layout .form-group-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-top: 5px;
 }
-.date-calculator .form-group-header label, .hours-calculator .form-group-header label {
+.date-calculator .form-group-header label, .hours-calculator .form-group-header label, .minute-timer-layout .form-group-header label {
   font-size: 0.95rem;
   font-weight: bold;
   color: #D6D6D6;
 }
-.date-calculator .form-group-header .today-btn, .hours-calculator .form-group-header .today-btn {
+.date-calculator .form-group-header .today-btn, .hours-calculator .form-group-header .today-btn, .minute-timer-layout .form-group-header .today-btn {
   background: none;
   border: none;
   color: #979797;
@@ -583,86 +683,110 @@ nav a:hover {
   text-decoration: underline;
   padding: 0;
 }
-.date-calculator .form-group-header .today-btn:hover, .hours-calculator .form-group-header .today-btn:hover {
+.date-calculator .form-group-header .today-btn:hover, .hours-calculator .form-group-header .today-btn:hover, .minute-timer-layout .form-group-header .today-btn:hover {
   color: #E2E800;
 }
-.date-calculator .form-group, .hours-calculator .form-group {
+.date-calculator .form-group, .hours-calculator .form-group, .minute-timer-layout .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
   width: 100%;
   min-width: 0;
 }
-.date-calculator .form-group label, .hours-calculator .form-group label {
+.date-calculator .form-group label, .hours-calculator .form-group label, .minute-timer-layout .form-group label {
   font-size: 0.9rem;
   font-weight: bold;
   color: #D6D6D6;
 }
-.date-calculator .form-group input[type=text], .date-calculator .form-group input[type=number], .date-calculator .form-group select, .hours-calculator .form-group input[type=text], .hours-calculator .form-group input[type=number], .hours-calculator .form-group select {
+.date-calculator .form-group input[type=text], .date-calculator .form-group input[type=number], .date-calculator .form-group input[type=url], .date-calculator .form-group input[type=date], .date-calculator .form-group input[type=datetime-local], .date-calculator .form-group select, .date-calculator .form-group .flatpickr-mobile, .hours-calculator .form-group input[type=text], .hours-calculator .form-group input[type=number], .hours-calculator .form-group input[type=url], .hours-calculator .form-group input[type=date], .hours-calculator .form-group input[type=datetime-local], .hours-calculator .form-group select, .hours-calculator .form-group .flatpickr-mobile, .minute-timer-layout .form-group input[type=text], .minute-timer-layout .form-group input[type=number], .minute-timer-layout .form-group input[type=url], .minute-timer-layout .form-group input[type=date], .minute-timer-layout .form-group input[type=datetime-local], .minute-timer-layout .form-group select, .minute-timer-layout .form-group .flatpickr-mobile {
   padding: 12px 16px;
+  height: 46px;
+  min-height: 46px;
+  max-height: 46px;
+  box-sizing: border-box;
   font-size: 1rem;
   border: 1px solid #444444;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(255, 255, 255, 0.03) !important;
   outline: none;
   width: 100%;
   min-width: 0;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   font-family: inherit;
-  color: #D6D6D6;
+  color: #D6D6D6 !important;
+  color-scheme: dark !important;
+  -webkit-appearance: none;
 }
-.date-calculator .form-group input[type=text]:focus, .date-calculator .form-group input[type=number]:focus, .date-calculator .form-group select:focus, .hours-calculator .form-group input[type=text]:focus, .hours-calculator .form-group input[type=number]:focus, .hours-calculator .form-group select:focus {
+.date-calculator .form-group input[type=text]:focus, .date-calculator .form-group input[type=number]:focus, .date-calculator .form-group input[type=url]:focus, .date-calculator .form-group input[type=date]:focus, .date-calculator .form-group input[type=datetime-local]:focus, .date-calculator .form-group select:focus, .date-calculator .form-group .flatpickr-mobile:focus, .hours-calculator .form-group input[type=text]:focus, .hours-calculator .form-group input[type=number]:focus, .hours-calculator .form-group input[type=url]:focus, .hours-calculator .form-group input[type=date]:focus, .hours-calculator .form-group input[type=datetime-local]:focus, .hours-calculator .form-group select:focus, .hours-calculator .form-group .flatpickr-mobile:focus, .minute-timer-layout .form-group input[type=text]:focus, .minute-timer-layout .form-group input[type=number]:focus, .minute-timer-layout .form-group input[type=url]:focus, .minute-timer-layout .form-group input[type=date]:focus, .minute-timer-layout .form-group input[type=datetime-local]:focus, .minute-timer-layout .form-group select:focus, .minute-timer-layout .form-group .flatpickr-mobile:focus {
   border-color: #E2E800;
   box-shadow: 0 0 0 3px rgba(226, 232, 0, 0.15);
 }
+.date-calculator input[type=date]::-webkit-calendar-picker-indicator,
+.date-calculator input[type=datetime-local]::-webkit-calendar-picker-indicator,
+.date-calculator .flatpickr-mobile::-webkit-calendar-picker-indicator, .hours-calculator input[type=date]::-webkit-calendar-picker-indicator,
+.hours-calculator input[type=datetime-local]::-webkit-calendar-picker-indicator,
+.hours-calculator .flatpickr-mobile::-webkit-calendar-picker-indicator, .minute-timer-layout input[type=date]::-webkit-calendar-picker-indicator,
+.minute-timer-layout input[type=datetime-local]::-webkit-calendar-picker-indicator,
+.minute-timer-layout .flatpickr-mobile::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+}
 .date-calculator input[type=number]::-webkit-outer-spin-button,
 .date-calculator input[type=number]::-webkit-inner-spin-button, .hours-calculator input[type=number]::-webkit-outer-spin-button,
-.hours-calculator input[type=number]::-webkit-inner-spin-button {
+.hours-calculator input[type=number]::-webkit-inner-spin-button, .minute-timer-layout input[type=number]::-webkit-outer-spin-button,
+.minute-timer-layout input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.date-calculator input[type=number], .hours-calculator input[type=number] {
+.date-calculator input[type=number], .hours-calculator input[type=number], .minute-timer-layout input[type=number] {
   -moz-appearance: textfield; /* Firefox */
 }
-.date-calculator .datepicker-input.input-error, .date-calculator input.input-error, .hours-calculator .datepicker-input.input-error, .hours-calculator input.input-error {
+.date-calculator .datepicker-input.input-error, .date-calculator input.input-error, .hours-calculator .datepicker-input.input-error, .hours-calculator input.input-error, .minute-timer-layout .datepicker-input.input-error, .minute-timer-layout input.input-error {
   border-color: #ff3333 !important;
   box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.2) !important;
 }
-.date-calculator .datepicker-input.input-error::placeholder, .date-calculator input.input-error::placeholder, .hours-calculator .datepicker-input.input-error::placeholder, .hours-calculator input.input-error::placeholder {
+.date-calculator .datepicker-input.input-error::placeholder, .date-calculator input.input-error::placeholder, .hours-calculator .datepicker-input.input-error::placeholder, .hours-calculator input.input-error::placeholder, .minute-timer-layout .datepicker-input.input-error::placeholder, .minute-timer-layout input.input-error::placeholder {
   color: #ff3333 !important;
 }
-.date-calculator .time-grid, .hours-calculator .time-grid {
+.date-calculator .time-grid, .hours-calculator .time-grid, .minute-timer-layout .time-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 @media (max-width: 576px) {
-  .date-calculator .time-grid, .hours-calculator .time-grid {
+  .date-calculator .time-grid, .hours-calculator .time-grid, .minute-timer-layout .time-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-.date-calculator .exclude-days-section, .hours-calculator .exclude-days-section {
+.date-calculator .exclude-days-section, .hours-calculator .exclude-days-section, .minute-timer-layout .exclude-days-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
 }
-.date-calculator .exclude-days-section .exclude-title, .hours-calculator .exclude-days-section .exclude-title {
+.date-calculator .exclude-days-section .exclude-title, .hours-calculator .exclude-days-section .exclude-title, .minute-timer-layout .exclude-days-section .exclude-title {
   display: block;
   font-weight: bold;
   font-size: 0.95rem;
   color: #D6D6D6;
   margin-bottom: 12px;
 }
-.date-calculator .exclude-days-section .exclude-days-pills, .hours-calculator .exclude-days-section .exclude-days-pills {
+.date-calculator .exclude-days-section .exclude-days-pills, .hours-calculator .exclude-days-section .exclude-days-pills, .minute-timer-layout .exclude-days-section .exclude-days-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
+  align-items: center;
   width: 100%;
+  margin: 0 auto;
 }
-.date-calculator .exclude-pill, .hours-calculator .exclude-pill {
+@media (max-width: 576px) {
+  .date-calculator .exclude-days-section .exclude-days-pills, .hours-calculator .exclude-days-section .exclude-days-pills, .minute-timer-layout .exclude-days-section .exclude-days-pills {
+    gap: 6px;
+  }
+}
+.date-calculator .exclude-pill, .hours-calculator .exclude-pill, .minute-timer-layout .exclude-pill {
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid #444444;
   color: #979797;
@@ -675,22 +799,28 @@ nav a:hover {
   outline: none;
   font-family: inherit;
 }
-.date-calculator .exclude-pill:hover, .hours-calculator .exclude-pill:hover {
+@media (max-width: 576px) {
+  .date-calculator .exclude-pill, .hours-calculator .exclude-pill, .minute-timer-layout .exclude-pill {
+    padding: 6px 11px;
+    font-size: 0.82rem;
+  }
+}
+.date-calculator .exclude-pill:hover, .hours-calculator .exclude-pill:hover, .minute-timer-layout .exclude-pill:hover {
   border-color: #E2E800;
   color: #E2E800;
   background-color: rgba(226, 232, 0, 0.05);
 }
-.date-calculator .exclude-pill.active, .hours-calculator .exclude-pill.active {
+.date-calculator .exclude-pill.active, .hours-calculator .exclude-pill.active, .minute-timer-layout .exclude-pill.active {
   background: #9ba000;
   border-color: transparent;
   color: #141414;
   box-shadow: 0 4px 10px rgba(155, 160, 0, 0.25);
 }
-.date-calculator .exclude-pill.active:hover, .hours-calculator .exclude-pill.active:hover {
+.date-calculator .exclude-pill.active:hover, .hours-calculator .exclude-pill.active:hover, .minute-timer-layout .exclude-pill.active:hover {
   color: #141414;
   box-shadow: 0 6px 15px rgba(155, 160, 0, 0.35);
 }
-.date-calculator .calc-btn-full, .hours-calculator .calc-btn-full {
+.date-calculator .calc-btn-full, .hours-calculator .calc-btn-full, .minute-timer-layout .calc-btn-full {
   background: linear-gradient(45deg, #a2a700, #7a7e00);
   color: #141414;
   font-family: inherit;
@@ -705,15 +835,15 @@ nav a:hover {
   text-align: center;
   width: 100%;
 }
-.date-calculator .calc-btn-full:hover, .hours-calculator .calc-btn-full:hover {
+.date-calculator .calc-btn-full:hover, .hours-calculator .calc-btn-full:hover, .minute-timer-layout .calc-btn-full:hover {
   color: #141414;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(155, 160, 0, 0.4);
 }
-.date-calculator .calc-btn-full:active, .hours-calculator .calc-btn-full:active {
+.date-calculator .calc-btn-full:active, .hours-calculator .calc-btn-full:active, .minute-timer-layout .calc-btn-full:active {
   transform: translateY(0);
 }
-.date-calculator .duration-results, .hours-calculator .duration-results {
+.date-calculator .duration-results, .hours-calculator .duration-results, .minute-timer-layout .duration-results {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 12px;
   padding: 20px;
@@ -725,7 +855,7 @@ nav a:hover {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   border: 1px solid #444444;
 }
-.date-calculator .duration-results .result-item, .hours-calculator .duration-results .result-item {
+.date-calculator .duration-results .result-item, .hours-calculator .duration-results .result-item, .minute-timer-layout .duration-results .result-item {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -735,11 +865,11 @@ nav a:hover {
   padding-right: 15px;
   text-align: center;
 }
-.date-calculator .duration-results .result-item:last-child, .hours-calculator .duration-results .result-item:last-child {
+.date-calculator .duration-results .result-item:last-child, .hours-calculator .duration-results .result-item:last-child, .minute-timer-layout .duration-results .result-item:last-child {
   border-right: none;
   padding-right: 0;
 }
-.date-calculator .duration-results .result-item .result-label, .hours-calculator .duration-results .result-item .result-label {
+.date-calculator .duration-results .result-item .result-label, .hours-calculator .duration-results .result-item .result-label, .minute-timer-layout .duration-results .result-item .result-label {
   font-size: 0.8rem;
   color: #979797;
   margin-bottom: 6px;
@@ -747,7 +877,7 @@ nav a:hover {
   letter-spacing: 0.05em;
   font-weight: bold;
 }
-.date-calculator .duration-results .result-item .result-value, .hours-calculator .duration-results .result-item .result-value {
+.date-calculator .duration-results .result-item .result-value, .hours-calculator .duration-results .result-item .result-value, .minute-timer-layout .duration-results .result-item .result-value {
   font-size: 2.2rem;
   font-weight: 800;
   font-family: inherit;
@@ -756,22 +886,32 @@ nav a:hover {
   -webkit-text-fill-color: transparent;
 }
 @media (max-width: 576px) {
-  .date-calculator .duration-results, .hours-calculator .duration-results {
-    flex-direction: column;
+  .date-calculator .duration-results, .hours-calculator .duration-results, .minute-timer-layout .duration-results {
+    flex-direction: row;
+    padding: 12px 6px;
+    gap: 4px;
   }
-  .date-calculator .duration-results .result-item, .hours-calculator .duration-results .result-item {
-    border-right: none;
-    border-bottom: 1px solid #444444 !important;
-    padding-right: 0;
-    padding-bottom: 15px !important;
-    width: 100%;
-  }
-  .date-calculator .duration-results .result-item:last-child, .hours-calculator .duration-results .result-item:last-child {
+  .date-calculator .duration-results .result-item, .hours-calculator .duration-results .result-item, .minute-timer-layout .duration-results .result-item {
+    border-right: 1px solid #444444;
     border-bottom: none !important;
+    padding-right: 4px;
     padding-bottom: 0 !important;
+    width: auto;
+  }
+  .date-calculator .duration-results .result-item:last-child, .hours-calculator .duration-results .result-item:last-child, .minute-timer-layout .duration-results .result-item:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+  .date-calculator .duration-results .result-item .result-label, .hours-calculator .duration-results .result-item .result-label, .minute-timer-layout .duration-results .result-item .result-label {
+    font-size: 0.6rem;
+    margin-bottom: 2px;
+    letter-spacing: 0;
+  }
+  .date-calculator .duration-results .result-item .result-value, .hours-calculator .duration-results .result-item .result-value, .minute-timer-layout .duration-results .result-item .result-value {
+    font-size: 1.3rem;
   }
 }
-.date-calculator .date-result-box, .hours-calculator .date-result-box {
+.date-calculator .date-result-box, .hours-calculator .date-result-box, .minute-timer-layout .date-result-box {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 10px;
   padding: 24px;
@@ -785,7 +925,7 @@ nav a:hover {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.date-calculator .date-result-box.error, .hours-calculator .date-result-box.error {
+.date-calculator .date-result-box.error, .hours-calculator .date-result-box.error, .minute-timer-layout .date-result-box.error {
   background: rgba(127, 29, 29, 0.2);
   color: #fee2e2;
   -webkit-text-fill-color: initial;
@@ -982,14 +1122,10 @@ nav a:hover {
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
-@media (max-width: 768px) {
+@media (max-width: 576px) {
   .character-counter .char-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 480px) {
-  .character-counter .char-stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
 }
 .character-counter .char-stat-card {
@@ -1005,6 +1141,11 @@ nav a:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+@media (max-width: 576px) {
+  .character-counter .char-stat-card {
+    padding: 10px 6px;
+  }
+}
 .character-counter .char-stat-card:hover {
   border-color: rgba(226, 232, 0, 0.3);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
@@ -1017,12 +1158,24 @@ nav a:hover {
   margin-bottom: 8px;
   font-weight: bold;
 }
+@media (max-width: 576px) {
+  .character-counter .char-stat-card .stat-label {
+    font-size: 0.65rem;
+    margin-bottom: 4px;
+    letter-spacing: 0;
+  }
+}
 .character-counter .char-stat-card .stat-value {
   font-size: 1.8rem;
   font-weight: 800;
   background: linear-gradient(45deg, #E2E800, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+@media (max-width: 576px) {
+  .character-counter .char-stat-card .stat-value {
+    font-size: 1.3rem;
+  }
 }
 .character-counter .char-stat-card .stat-value .stat-unit {
   font-size: 0.95rem;
@@ -1053,6 +1206,8 @@ nav a:hover {
 }
 .hours-calculator .time-value-group .time-input-row {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   gap: 15px;
   width: 100%;
 }
@@ -1061,11 +1216,15 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .hours-calculator .time-value-group .time-input-row {
-    flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+  }
+  .hours-calculator .time-value-group .time-input-row input[type=number] {
+    padding: 10px 8px;
+    text-align: center;
   }
 }
 .hours-calculator .operation-selection-section {
@@ -1106,4 +1265,126 @@ nav a:hover {
 .hours-calculator .operation-selection-section .op-pill.active:hover {
   color: #141414;
   box-shadow: 0 6px 15px rgba(155, 160, 0, 0.35);
+}
+
+.minute-timer-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.minute-timer-layout .timer-presets-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  width: 100%;
+}
+.minute-timer-layout .timer-presets-section .preset-label {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #D6D6D6;
+}
+.minute-timer-layout .timer-presets-section .preset-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+.minute-timer-layout .timer-presets-section .timer-preset-pill {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid #444444;
+  color: #979797;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.minute-timer-layout .timer-presets-section .timer-preset-pill:hover:not(:disabled) {
+  border-color: #E2E800;
+  color: #E2E800;
+  background-color: rgba(226, 232, 0, 0.05);
+}
+.minute-timer-layout .timer-presets-section .timer-preset-pill.active {
+  background-color: #E2E800 !important;
+  border-color: #E2E800 !important;
+  color: #141414 !important;
+  font-weight: bold !important;
+  box-shadow: 0 4px 12px rgba(226, 232, 0, 0.3);
+}
+.minute-timer-layout .timer-presets-section .timer-preset-pill.active:hover {
+  background-color: #E2E800 !important;
+  color: #141414 !important;
+  box-shadow: 0 6px 15px rgba(226, 232, 0, 0.4);
+}
+.minute-timer-layout .timer-presets-section .timer-preset-pill:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.minute-timer-layout .timer-help-text {
+  font-size: 0.85rem;
+  color: #979797;
+  margin-top: 6px;
+  display: block;
+}
+.minute-timer-layout .timer-display-box {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(226, 232, 0, 0.25);
+  border-radius: 12px;
+  padding: 25px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 5px;
+}
+.minute-timer-layout .timer-display-box.shake-error {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+.minute-timer-layout .timer-display-box .timer-digits {
+  font-family: inherit;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #E2E800;
+  text-shadow: 0 0 20px rgba(226, 232, 0, 0.35);
+  line-height: 1;
+}
+@media (max-width: 576px) {
+  .minute-timer-layout .timer-display-box .timer-digits {
+    font-size: 2.8rem;
+  }
+}
+.minute-timer-layout .timer-display-box .timer-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+.minute-timer-layout .timer-display-box .timer-progress-bar .timer-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #9BA000, #E2E800);
+  transition: width 1s linear;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
