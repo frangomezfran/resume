@@ -379,45 +379,121 @@ nav {
 
 .accordion-item {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid $color-charcoal;
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: rgba(226, 232, 0, 0.3);
+    background: rgba(255, 255, 255, 0.035);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
 
   &.active {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-    border-color: $color-medium-gray;
+    border-color: $color-lime;
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(226, 232, 0, 0.1);
+    transform: none;
     overflow: visible !important; // Allow Flatpickr to spill out without clipping!
   }
 }
 
 .accordion-header {
   width: 100%;
-  padding: 18px 24px;
-  background: rgba(255, 255, 255, 0.02);
+  padding: 16px 20px;
+  background: transparent;
   border: none;
-  text-align: left;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // clean Sans-Serif font to match fields
-  font-size: 1.25rem;
-  font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: $text-main;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background 0.3s ease;
+  outline: none;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.05);
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .accordion-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: $text-muted;
+    flex-shrink: 0;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s ease;
+    }
+  }
+
+  &:hover .accordion-badge {
+    border-color: rgba(226, 232, 0, 0.4);
+    background: rgba(226, 232, 0, 0.05);
+    color: $color-lime;
+  }
+
+  &.active .accordion-badge {
+    border-color: $color-lime;
+    background: rgba(226, 232, 0, 0.08);
+    color: $color-lime;
+  }
+
+  .accordion-header-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    margin: 0;
+  }
+
+  .accordion-title {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: $text-main;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+  }
+
+  .accordion-subtitle {
+    font-size: 0.82rem;
+    color: $text-muted;
+    margin-top: 4px;
+    margin-bottom: 0;
+    line-height: 1.2;
+    padding: 0;
   }
 
   .accordion-icon {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
+    font-size: 1.1rem;
+    color: $text-muted;
+    transition: transform 0.3s ease, color 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 10px;
   }
 
   &.active .accordion-icon {
     transform: rotate(180deg);
+    color: $color-lime;
   }
 }
 
@@ -425,29 +501,37 @@ nav {
 .accordion-content {
   display: grid;
   grid-template-rows: 0fr; // height starts at 0
-  transition: grid-template-rows 0.35s ease;
+  transition: grid-template-rows 0.35s ease, visibility 0.35s ease;
   overflow: hidden;
   background: transparent;
+  visibility: hidden; // Completely hidden when compressed/closed
 
   &.open {
-    grid-template-rows: 1fr; // height expands to exactly fit auto content size smoothly!
-    overflow: visible !important; // Allow Flatpickr popup to spill out
+    grid-template-rows: 1fr; // height expands to fit content smoothly
+    visibility: visible;
+    overflow: visible !important;
   }
 
   .accordion-body {
-    min-height: 0; // Required for grid row height animation to compute correctly
-    padding: 24px;
-    border-top: 1px solid $color-charcoal;
-    opacity: 0; // Fade content in/out concurrently
-    transition: opacity 0.25s ease;
+    min-height: 0;
+    padding: 0 24px;
+    border-top: none;
+    opacity: 0;
+    transition: opacity 0.25s ease, padding 0.35s ease;
 
     @media (max-width: 576px) {
-      padding: 16px;
+      padding: 0 16px;
     }
   }
 
   &.open .accordion-body {
     opacity: 1;
+    padding: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    @media (max-width: 576px) {
+      padding: 16px;
+    }
   }
 }
 
@@ -481,8 +565,8 @@ nav {
   font-weight: bold;
 }
 
-// --- Date Calculator Widget ---
-.date-calculator, .hours-calculator {
+// --- Date Calculator, Hours Calculator & Minute Timer Widgets ---
+.date-calculator, .hours-calculator, .minute-timer-layout {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -545,6 +629,32 @@ nav {
       svg {
         width: 16px;
         height: 16px;
+      }
+    }
+  }
+
+  // Time input row (Hours, Minutes, Seconds in single horizontal row)
+  .time-input-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 15px;
+    width: 100%;
+
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    @media (max-width: 576px) {
+      gap: 8px;
+
+      input[type="number"] {
+        padding: 10px 8px;
+        text-align: center;
       }
     }
   }
@@ -662,24 +772,38 @@ nav {
       color: $text-main;
     }
 
-    input[type="text"], input[type="number"], select {
+    input[type="text"], input[type="number"], input[type="url"], input[type="date"], input[type="datetime-local"], select, .flatpickr-mobile {
       padding: 12px 16px;
+      height: 46px;
+      min-height: 46px;
+      max-height: 46px;
+      box-sizing: border-box;
       font-size: 1rem;
       border: 1px solid $color-charcoal;
       border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.03); // dark input
+      background-color: rgba(255, 255, 255, 0.03) !important; // dark input
       outline: none;
       width: 100%;
       min-width: 0;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
       font-family: inherit;
-      color: $text-main;
+      color: $text-main !important;
+      color-scheme: dark !important; // Forces iOS Safari native date picker UI controls to dark mode!
+      -webkit-appearance: none;
 
       &:focus {
         border-color: $color-lime;
         box-shadow: 0 0 0 3px rgba(226, 232, 0, 0.15);
       }
     }
+  }
+
+  // Override WebKit native date picker indicator on iOS / Safari
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+  .flatpickr-mobile::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+    cursor: pointer;
   }
 
   // Hide native spinners for input[type="number"]
@@ -732,8 +856,14 @@ nav {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      justify-content: center; // Centered
+      justify-content: center;
+      align-items: center;
       width: 100%;
+      margin: 0 auto;
+
+      @media (max-width: 576px) {
+        gap: 6px;
+      }
     }
   }
 
@@ -750,6 +880,11 @@ nav {
     transition: all 0.2s ease-in-out;
     outline: none;
     font-family: inherit;
+
+    @media (max-width: 576px) {
+      padding: 6px 11px;
+      font-size: 0.82rem;
+    }
 
     &:hover {
       border-color: $color-lime;
@@ -845,18 +980,30 @@ nav {
     }
 
     @media (max-width: 576px) {
-      flex-direction: column; // Stack on small mobile screens
+      flex-direction: row; // Keep 1 single horizontal row even on mobile!
+      padding: 12px 6px;
+      gap: 4px;
       
       .result-item {
-        border-right: none;
-        border-bottom: 1px solid $color-charcoal !important;
-        padding-right: 0;
-        padding-bottom: 15px !important;
-        width: 100%;
-        
+        border-right: 1px solid $color-charcoal;
+        border-bottom: none !important;
+        padding-right: 4px;
+        padding-bottom: 0 !important;
+        width: auto;
+
         &:last-child {
-          border-bottom: none !important;
-          padding-bottom: 0 !important;
+          border-right: none;
+          padding-right: 0;
+        }
+
+        .result-label {
+          font-size: 0.6rem;
+          margin-bottom: 2px;
+          letter-spacing: 0;
+        }
+
+        .result-value {
+          font-size: 1.3rem;
         }
       }
     }
@@ -1108,12 +1255,9 @@ nav {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 480px) {
-      grid-template-columns: 1fr;
+    @media (max-width: 576px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
     }
   }
 
@@ -1130,6 +1274,10 @@ nav {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
+    @media (max-width: 576px) {
+      padding: 10px 6px;
+    }
+
     &:hover {
       border-color: rgba($color-lime, 0.3);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
@@ -1142,6 +1290,12 @@ nav {
       letter-spacing: 0.05em;
       margin-bottom: 8px;
       font-weight: bold;
+
+      @media (max-width: 576px) {
+        font-size: 0.65rem;
+        margin-bottom: 4px;
+        letter-spacing: 0;
+      }
     }
 
     .stat-value {
@@ -1150,6 +1304,10 @@ nav {
       background: $gradient-text-accent;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+
+      @media (max-width: 576px) {
+        font-size: 1.3rem;
+      }
       
       .stat-unit {
         font-size: 0.95rem;
@@ -1186,6 +1344,8 @@ nav {
 
     .time-input-row {
       display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
       gap: 15px;
       width: 100%;
 
@@ -1194,11 +1354,16 @@ nav {
         display: flex;
         flex-direction: column;
         gap: 6px;
+        min-width: 0;
       }
 
-      @media (max-width: 480px) {
-        flex-direction: column;
-        gap: 12px;
+      @media (max-width: 576px) {
+        gap: 8px;
+
+        input[type="number"] {
+          padding: 10px 8px;
+          text-align: center;
+        }
       }
     }
   }
@@ -1249,5 +1414,134 @@ nav {
   }
 
 }
+
+// --- Minute Timer Widget ---
+.minute-timer-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .timer-presets-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    width: 100%;
+
+    .preset-label {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: $text-main;
+    }
+
+    .preset-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .timer-preset-pill {
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid $color-charcoal;
+      color: $text-muted;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease-in-out;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+
+      &:hover:not(:disabled) {
+        border-color: $color-lime;
+        color: $color-lime;
+        background-color: rgba(226, 232, 0, 0.05);
+      }
+
+      &.active {
+        background-color: $color-lime !important;
+        border-color: $color-lime !important;
+        color: #141414 !important;
+        font-weight: bold !important;
+        box-shadow: 0 4px 12px rgba(226, 232, 0, 0.3);
+
+        &:hover {
+          background-color: $color-lime !important;
+          color: #141414 !important;
+          box-shadow: 0 6px 15px rgba(226, 232, 0, 0.4);
+        }
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .timer-help-text {
+    font-size: 0.85rem;
+    color: $text-muted;
+    margin-top: 6px;
+    display: block;
+  }
+
+  .timer-display-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(226, 232, 0, 0.25);
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 5px;
+
+    &.shake-error {
+      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+
+    .timer-digits {
+      font-family: inherit;
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: $color-lime;
+      text-shadow: 0 0 20px rgba(226, 232, 0, 0.35);
+      line-height: 1;
+
+      @media (max-width: 576px) {
+        font-size: 2.8rem;
+      }
+    }
+
+    .timer-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      margin-top: 15px;
+      overflow: hidden;
+
+      .timer-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #9BA000, #E2E800);
+        transition: width 1s linear;
+      }
+    }
+  }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
 
 
